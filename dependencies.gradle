@@ -1,0 +1,82 @@
+ext{
+    constraint_layout_version   = '1.0.2'
+    retrofit2_version           = '2.3.0'
+    rxbinding2_version          = '2.0.0'
+    rxlifecycle2_version        = '2.2.1'
+    glide_version               = '4.4.0'
+    dagger2_version             = '2.13'
+    ijkplayer_version           = '0.8.4'
+    DanmuFlameMaster_version    = '0.9.16'
+    support_version             = '27.0.2'
+    buildToolsVersion           = '26.0.2'
+    kotlin_version              = '1.1.51'
+    rxjava_version              = '2.1.7'
+    rxandroid_version           = '2.0.1'
+    junit_version               = '4.12'
+    espresso_version            = '2.2.2'
+    runner_version              = '0.5'
+    rxpermissions_version       = '0.9.4'
+
+    minSdkVersion               = 15
+    compileSdkVersion           = 27
+    targetSdkVersion            = 27
+
+    kotlinStdlib                = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kotlinPoet                  = 'com.squareup:kotlinpoet:0.4.0'
+
+    supportAnnotations          = "com.android.support:support-annotations:$support_version"
+    supportRecyclerView         = "com.android.support:recyclerview-v7:$support_version"
+    supportAppCompat            = "com.android.support:appcompat-v7:$support_version"
+    supportDesign               = "com.android.support:design:$support_version"
+
+    constraintLayout            = "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+
+    junit                       = "junit:junit:$junit_version"
+
+    supportTestRunner           = "com.android.support.test:runner:$runner_version"
+    supportTestEspresso         = "com.android.support.test.espresso:espresso-core:$espresso_version"
+    supportTestEspressoContrib  = "com.android.support.test.espresso:espresso-contrib:$espresso_version"
+
+    rxJava                      = "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    rxAndroid                   = "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    danmuFlameMaster            = "com.github.ctiao:DanmakuFlameMaster:$DanmuFlameMaster_version"
+    ndkbitmap_armv7a            = "com.github.ctiao:ndkbitmap-armv7a:$DanmuFlameMaster_version"
+
+    ijkplayer_java              = 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
+    ijkplayer_armv7a            = 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
+
+    retrofit_adapter_rxjava     = "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    retrofit_converter_gson     =  "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    rxpermissions               = "com.tbruyelle.rxpermissions2:rxpermissions:$rxpermissions_version@aar"
+
+    dagger                      = "com.google.dagger:dagger:$dagger2_version"
+    dagger_processor            = "com.google.dagger:dagger-compiler:$dagger2_version"
+    dagger_android              = "com.google.dagger:dagger-android:$dagger2_version"
+    dagger_android_support      = "com.google.dagger:dagger-android-support:$dagger2_version"
+    dagger_android_processor    = "com.google.dagger:dagger-android-processor:$dagger2_version"
+
+    glide                       =  "com.github.bumptech.glide:glide:$glide_version"
+    glide_compiler              = "com.github.bumptech.glide:compiler:$glide_version"
+
+    rxlifecycle                 = "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle2_version"
+
+    rxbinding2_recyclerview     = "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxbinding2_version"
+    rxbinding2_appcompat        = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding2_version"
+    rxbinding2_design           = "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding2_version"
+
+}
+
+
+subprojects { project ->
+    project.configurations.all {
+        resolutionStrategy {
+            eachDependency { details ->
+                if (details.requested.group == 'com.android.support') {
+                    details.useVersion(rootProject.ext.support_version)
+                }
+            }
+        }
+    }
+}
