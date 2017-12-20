@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NavigationBar_RadioButton">
+        <attr name="DrawableSize" format="dimension"/>
+        <attr name="DrawableTop" format="reference"/>
+        <attr name="DrawableBottom" format="reference"/>
+        <attr name="DrawableLeft" format="reference"/>
+        <attr name="DrawableRight" format="reference"/>
+    </declare-styleable>
+</resources>
