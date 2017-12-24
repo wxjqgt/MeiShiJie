@@ -27,8 +27,8 @@
             android:layout_weight="1"
             android:checked="true"
             android:text="推荐"
-            app:DrawableSize="25dp"
-            app:DrawableTop="@drawable/main_tab_discover_selector" />
+            app:DrawableSize="30dp"
+            app:DrawableTop="@drawable/main_tab_recommend_selector" />
 
         <com.weibo.meishijie.mvp.view.widget.Nav_RadioButton
             android:id="@+id/rb_discovery"
@@ -37,8 +37,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="发现"
-            app:DrawableSize="25dp"
-            app:DrawableTop="@drawable/main_tab_recommend_selector" />
+            app:DrawableSize="30dp"
+            app:DrawableTop="@drawable/main_tab_discover_selector" />
 
         <com.weibo.meishijie.mvp.view.widget.Nav_RadioButton
             android:id="@+id/rb_store"
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="商城"
-            app:DrawableSize="25dp"
+            app:DrawableSize="30dp"
             app:DrawableTop="@drawable/main_tab_store_selector" />
 
         <com.weibo.meishijie.mvp.view.widget.Nav_RadioButton
@@ -57,7 +57,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="食话"
-            app:DrawableSize="25dp"
+            app:DrawableSize="30dp"
             app:DrawableTop="@drawable/main_tab_topic_selector" />
 
         <com.weibo.meishijie.mvp.view.widget.Nav_RadioButton
@@ -67,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="我的"
-            app:DrawableSize="25dp"
+            app:DrawableSize="30dp"
             app:DrawableTop="@drawable/main_tab_mine_selector" />
 
     </RadioGroup>

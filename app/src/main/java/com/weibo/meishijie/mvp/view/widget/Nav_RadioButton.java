@@ -57,10 +57,9 @@ public class Nav_RadioButton extends AppCompatRadioButton {
                     break;
             }
         }
+        setCustomCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom);
         //回收
         a.recycle();
-        setCustomCompoundDrawablesWithIntrinsicBounds(
-                drawableLeft, drawableTop, drawableRight, drawableBottom);
     }
 
     public void setCustomCompoundDrawablesWithIntrinsicBounds(
