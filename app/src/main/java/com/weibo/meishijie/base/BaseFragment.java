@@ -22,6 +22,12 @@ public abstract class BaseFragment extends RxFragment {
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(), container, false);
@@ -44,6 +50,9 @@ public abstract class BaseFragment extends RxFragment {
         if (isVisibleToUser && view != null) {
             loadData();
         }
+    }
+
+    private void init() {
     }
 
     protected void findView() {
