@@ -52,7 +52,7 @@ public abstract class BaseFragment extends RxFragment {
         }
     }
 
-    private void init() {
+    protected void init() {
     }
 
     protected void findView() {

@@ -32,11 +32,13 @@ public class RecommendFragment extends BaseFragment {
         return fragment;
     }
 
-
+    @Override
+    protected void init() {
+        DaggerHttpComponent.create().inject(this);
+    }
 
     @Override
     protected void loadData() {
-        DaggerHttpComponent.create().inject(this);
         HomeRecommendService homeRecommendService = retrofit.create(HomeRecommendService.class);
         homeRecommendService.request()
                 .compose(bindToLifecycle())
