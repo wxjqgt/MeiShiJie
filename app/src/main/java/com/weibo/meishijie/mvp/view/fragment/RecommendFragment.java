@@ -19,6 +19,13 @@ public class RecommendFragment extends BaseFragment {
     }
 
     @Override
+    protected void loadData() {
+
+
+
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.fragment_recommend;
     }
