@@ -4,7 +4,7 @@ package com.weibo.meishijie.bean.home_recommend;
  * Created by Administrator on 2017/12/27.
  */
 
-public class Recommend {
+public class HomeRecommend {
 
     /**
      * code : 1
