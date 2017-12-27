@@ -8,7 +8,7 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
-import com.weibo.meishijie.feature.dagger.component.DaggerHttpComponent;
+import com.weibo.meishijie.app.MeishijieApplication;
 
 import java.io.InputStream;
 
@@ -32,7 +32,7 @@ public final class OkHttpLibraryGlideModule extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide,
                                    @NonNull Registry registry) {
-        DaggerHttpComponent.create().inject(this);
+        MeishijieApplication.getHttpComponent().inject(this);
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(okHttpClient));
     }
 }
