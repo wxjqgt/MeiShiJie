@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.EvictProvider;
 import io.rx_cache2.Reply;
 
 
@@ -42,7 +43,7 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        meiShiJieCacheApiService.requestHomeRecommendData(meiShiJieApiService.requestHomeRecommendData())
+        meiShiJieCacheApiService.requestHomeRecommendData(meiShiJieApiService.requestHomeRecommendData(), new EvictProvider(true))
                 .compose(bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
