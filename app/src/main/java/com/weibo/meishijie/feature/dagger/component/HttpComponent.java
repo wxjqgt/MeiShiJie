@@ -2,7 +2,7 @@ package com.weibo.meishijie.feature.dagger.component;
 
 import com.weibo.meishijie.feature.dagger.module.HttpModule;
 import com.weibo.meishijie.feature.glide.integration.OkHttpLibraryGlideModule;
-import com.weibo.meishijie.mvp.view.fragment.RecommendFragment;
+import com.weibo.meishijie.mvp.model.RecommendModelImlp;
 
 import javax.inject.Singleton;
 
@@ -15,6 +15,6 @@ import dagger.Component;
 @Singleton
 @Component(modules = HttpModule.class)
 public interface HttpComponent {
-    void inject(RecommendFragment recommendFragment);
+    void inject(RecommendModelImlp recommendModelImlp);
     void inject(OkHttpLibraryGlideModule okHttpLibraryGlideModule);
 }

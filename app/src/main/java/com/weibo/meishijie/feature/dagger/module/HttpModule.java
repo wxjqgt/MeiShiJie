@@ -47,7 +47,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    public MeiShiJieCacheApiService provideMeiShiJieApiService() {
+    public MeiShiJieCacheApiService provideMeiShiJieCacheApiService() {
         String cacheDirPath = Environment.getDownloadCacheDirectory().getPath() + "/meishijiecache";
         File cacheDir = new File(cacheDirPath);
         return new RxCache.Builder()

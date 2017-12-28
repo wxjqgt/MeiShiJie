@@ -1,34 +1,30 @@
 package com.weibo.meishijie.mvp.view.fragment;
 
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.weibo.meishijie.R;
-import com.weibo.meishijie.app.MeishijieApplication;
 import com.weibo.meishijie.base.BaseFragment;
-import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
-import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
-import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
-import com.weibo.meishijie.util.LogUtils;
+import com.weibo.meishijie.bean.home_recommend.NavItems;
+import com.weibo.meishijie.bean.home_recommend.Recipes;
+import com.weibo.meishijie.bean.home_recommend.Sancan;
+import com.weibo.meishijie.bean.home_recommend.TodayRecommend;
+import com.weibo.meishijie.bean.home_recommend.Zhuanti;
+import com.weibo.meishijie.mvp.contract.RecommendContract;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-import io.rx_cache2.EvictProvider;
-import io.rx_cache2.Reply;
 
-
-public class RecommendFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView{
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
 
     @Inject
-    MeiShiJieCacheApiService meiShiJieCacheApiService;
-    @Inject
-    MeiShiJieApiService meiShiJieApiService;
+    RecommendContract.RecommendPresenter recommendPresenter;
 
     public RecommendFragment() {
-        // Required empty public constructor
+
     }
 
     public static RecommendFragment newInstance() {
@@ -37,27 +33,43 @@ public class RecommendFragment extends BaseFragment {
     }
 
     @Override
-    protected void init() {
-        MeishijieApplication.getHttpComponent().inject(this);
-    }
-
-    @Override
-    protected void loadData() {
-        meiShiJieCacheApiService.requestHomeRecommendData(meiShiJieApiService.requestHomeRecommendData(), new EvictProvider(true))
-                .compose(bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Reply<HomeRecommend>>() {
-                    @Override
-                    public void accept(Reply<HomeRecommend> homeRecommendReply) throws Exception {
-                        HomeRecommend homeRecommend = homeRecommendReply.getData();
-                        LogUtils.d(homeRecommend.getMsg());
-                    }
-                });
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_recommend;
+    }
+
+    @Override
+    public void loadNavItems(List<NavItems> navItemsList) {
+
+    }
+
+    @Override
+    public void loadRecipes(List<Recipes> recipesList) {
+
+    }
+
+    @Override
+    public void loadSancan(List<Sancan> sancan) {
+
+    }
+
+    @Override
+    public void loadTodayRecommend(TodayRecommend todayRecommend) {
+
+    }
+
+    @Override
+    public void loadZhuanti(Zhuanti zhuanti) {
+
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> bindToRxLifecycle() {
+        return bindToLifecycle();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        recommendPresenter.onDestroy();
     }
 }
