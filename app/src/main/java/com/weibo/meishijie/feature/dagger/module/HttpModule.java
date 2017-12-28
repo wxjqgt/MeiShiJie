@@ -48,9 +48,10 @@ public class HttpModule {
     @Singleton
     @Provides
     public MeiShiJieCacheApiService provideMeiShiJieApiService() {
-        File cahceDir = Environment.getDownloadCacheDirectory();
+        String cacheDirPath = Environment.getDownloadCacheDirectory().getPath() + "/meishijiecache";
+        File cacheDir = new File(cacheDirPath);
         return new RxCache.Builder()
-                .persistence(cahceDir, new GsonSpeaker())
+                .persistence(cacheDir, new GsonSpeaker())
                 .using(MeiShiJieCacheApiService.class);
     }
 

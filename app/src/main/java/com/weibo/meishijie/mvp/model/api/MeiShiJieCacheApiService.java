@@ -16,6 +16,6 @@ public interface MeiShiJieCacheApiService {
     /**
      * @return 推荐页的数据，使用rxcahe要求包装返回
      */
-    @LifeCache(duration = 30,timeUnit = TimeUnit.MINUTES)
+    @LifeCache(duration = 3,timeUnit = TimeUnit.MINUTES)
     Observable<Reply<HomeRecommend>> requestHomeRecommendData(Observable<HomeRecommend> homeRecommendObservable);
 }
