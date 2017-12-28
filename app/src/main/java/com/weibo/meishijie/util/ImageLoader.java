@@ -1,8 +1,15 @@
 package com.weibo.meishijie.util;
 
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.weibo.meishijie.feature.glide.integration.GlideApp;
+
 /**
  * Created by Administrator on 2016/5/6.
  */
 public final class ImageLoader {
-    private ImageLoader(){}
+    public static void load(Context context, String url, ImageView imageView) {
+        GlideApp.with(context).load(url).into(imageView);
+    }
 }
