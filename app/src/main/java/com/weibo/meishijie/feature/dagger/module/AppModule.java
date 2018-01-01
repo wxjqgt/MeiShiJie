@@ -2,8 +2,8 @@ package com.weibo.meishijie.feature.dagger.module;
 
 import android.os.Environment;
 
-import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
-import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
+import com.weibo.meishijie.api.MeiShiJieApiService;
+import com.weibo.meishijie.api.MeiShiJieCacheApiService;
 import com.weibo.meishijie.util.Constant;
 
 import java.io.File;
@@ -20,39 +20,47 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Administrator on 2017/12/27.
+ * Created by Administrator on 2018/1/1.
  */
 
 @Module
-public class HttpModule {
+public class AppModule {
 
     @Singleton
     @Provides
-    public OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient.Builder()
-                .build();
+    public MeiShiJieApiService providesMeiShiJieApiService(Retrofit retrofit) {
+        return retrofit.create(MeiShiJieApiService.class);
     }
 
     @Singleton
     @Provides
-    public MeiShiJieApiService provideMeiShiJieApiService(OkHttpClient okHttpClient) {
+    public MeiShiJieCacheApiService providesMeiShiJieCacheApiService(RxCache rxCache) {
+        return rxCache.using(MeiShiJieCacheApiService.class);
+    }
+
+    @Singleton
+    @Provides
+    public OkHttpClient providesOkHttpClient() {
+        return new OkHttpClient.Builder().build();
+    }
+
+    @Singleton
+    @Provides
+    public Retrofit providesRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(Constant.BASE_URL)
-                .build()
-                .create(MeiShiJieApiService.class);
+                .build();
     }
 
     @Singleton
     @Provides
-    public MeiShiJieCacheApiService provideMeiShiJieCacheApiService() {
+    public RxCache providesRxCache() {
         String cacheDirPath = Environment.getDownloadCacheDirectory().getPath() + "/meishijiecache";
         File cacheDir = new File(cacheDirPath);
         return new RxCache.Builder()
-                .persistence(cacheDir, new GsonSpeaker())
-                .using(MeiShiJieCacheApiService.class);
+                .persistence(cacheDir, new GsonSpeaker());
     }
-
 }

@@ -1,9 +1,10 @@
 package com.weibo.meishijie.mvp.presenter;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.bean.home_recommend.Data;
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
+import com.weibo.meishijie.feature.dagger.component.DaggerRecommendModelComponent;
+import com.weibo.meishijie.feature.dagger.module.RecommendModelModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 
 import javax.inject.Inject;
@@ -12,20 +13,24 @@ import javax.inject.Inject;
  * Created by Administrator on 2017/12/29.
  */
 
-public class RecommendPresenterImlp implements RecommendContract.RecommendPresenter {
+public class RecommendPresenterImlp implements RecommendContract.RecommendPresenter, RecommendContract.LoadListener {
 
-    @Inject
-    BaseModel recommendmodel;
     private RecommendContract.RecommendView recommendView;
 
     @Inject
-    public RecommendPresenterImlp(RecommendContract.RecommendView recommendView){
+    RecommendContract.RecommendModel recommendModel;
+
+    public RecommendPresenterImlp(RecommendContract.RecommendView recommendView) {
         this.recommendView = recommendView;
+        DaggerRecommendModelComponent.builder()
+                .recommendModelModule(new RecommendModelModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
     public void onStart() {
-        recommendmodel.load();
+        recommendModel.load();
     }
 
     @Override
@@ -44,7 +49,7 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     }
 
     @Override
-    public LifecycleTransformer providesLifecycleTransformer() {
+    public <T> LifecycleTransformer<T> bindToRxLifecycle() {
         return recommendView.bindToRxLifecycle();
     }
 }

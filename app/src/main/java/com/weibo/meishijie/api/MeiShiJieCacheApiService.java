@@ -1,4 +1,4 @@
-package com.weibo.meishijie.mvp.model.api;
+package com.weibo.meishijie.api;
 
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
 
@@ -10,6 +10,7 @@ import io.rx_cache2.EncryptKey;
 import io.rx_cache2.EvictProvider;
 import io.rx_cache2.LifeCache;
 import io.rx_cache2.Migration;
+import io.rx_cache2.ProviderKey;
 import io.rx_cache2.Reply;
 import io.rx_cache2.SchemeMigration;
 
@@ -25,6 +26,7 @@ public interface MeiShiJieCacheApiService {
     /**
      * @return 推荐页的数据，使用rxcahe要求包装返回
      */
+    @ProviderKey("request_home_recommend_data")
     @Encrypt
     @LifeCache(duration = 3, timeUnit = TimeUnit.MINUTES)
     Observable<Reply<HomeRecommend>> requestHomeRecommendData(Observable<HomeRecommend> homeRecommendObservable, EvictProvider evictProvider);

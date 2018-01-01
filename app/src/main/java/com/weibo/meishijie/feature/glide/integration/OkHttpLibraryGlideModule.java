@@ -32,7 +32,7 @@ public final class OkHttpLibraryGlideModule extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide,
                                    @NonNull Registry registry) {
-        MeishijieApplication.getHttpComponent().inject(this);
+        MeishijieApplication.getAppComponent().inject(this);
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(okHttpClient));
     }
 }

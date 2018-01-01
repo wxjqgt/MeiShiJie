@@ -1,4 +1,4 @@
-package com.weibo.meishijie.mvp.model.api;
+package com.weibo.meishijie.api;
 
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
 

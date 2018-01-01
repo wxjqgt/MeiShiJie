@@ -1,11 +1,10 @@
 package com.weibo.meishijie.mvp.model;
 
 import com.weibo.meishijie.app.MeishijieApplication;
-import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
-import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
+import com.weibo.meishijie.api.MeiShiJieApiService;
+import com.weibo.meishijie.api.MeiShiJieCacheApiService;
 
 import javax.inject.Inject;
 
@@ -19,31 +18,30 @@ import io.rx_cache2.Reply;
  * Created by Administrator on 2017/12/29.
  */
 
-public class RecommendModelImlp implements BaseModel {
+public class RecommendModelImlp implements RecommendContract.RecommendModel {
 
     @Inject
     MeiShiJieApiService meiShiJieApiService;
     @Inject
     MeiShiJieCacheApiService meiShiJieCacheApiService;
-    private RecommendContract.RecommendPresenter recommendPresenter;
+    private RecommendContract.LoadListener loadListener;
 
-    @Inject
-    public RecommendModelImlp(RecommendContract.RecommendPresenter recommendPresenter) {
-        MeishijieApplication.getHttpComponent().inject(this);
-        this.recommendPresenter = recommendPresenter;
+    public RecommendModelImlp(RecommendContract.LoadListener loadListener) {
+        this.loadListener = loadListener;
+        MeishijieApplication.getAppComponent().inject(this);
     }
 
     @Override
     public void load() {
         meiShiJieCacheApiService.requestHomeRecommendData(meiShiJieApiService.requestHomeRecommendData(), new EvictProvider(true))
-                .compose(recommendPresenter.bindToRxLifecycle())
+                .compose(loadListener.bindToRxLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Reply<HomeRecommend>>() {
                     @Override
                     public void accept(Reply<HomeRecommend> homeRecommendReply) throws Exception {
                         HomeRecommend homeRecommend = homeRecommendReply.getData();
-                        recommendPresenter.loadHomeRecommendData(homeRecommend);
+                        loadListener.loadHomeRecommendData(homeRecommend);
                     }
                 });
     }

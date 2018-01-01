@@ -1,5 +1,7 @@
 package com.weibo.meishijie.mvp.contract;
 
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.base.BasePresenter;
 import com.weibo.meishijie.base.BaseView;
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class RecommendContract {
     public interface RecommendPresenter extends BasePresenter{
-        void loadHomeRecommendData(HomeRecommend homeRecommend);
+
     }
     public interface RecommendView extends BaseView{
         void loadNavItems(List<NavItems> navItemsList);
@@ -25,5 +27,12 @@ public class RecommendContract {
         void loadSancan(List<Sancan> sancan);
         void loadTodayRecommend(TodayRecommend todayRecommend);
         void loadZhuanti(Zhuanti zhuanti);
+    }
+    public interface RecommendModel extends BaseModel{
+
+    }
+    public interface LoadListener{
+        void loadHomeRecommendData(HomeRecommend homeRecommend);
+        <T> LifecycleTransformer<T> bindToRxLifecycle();
     }
 }
