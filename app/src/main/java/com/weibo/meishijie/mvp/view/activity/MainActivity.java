@@ -1,11 +1,14 @@
 package com.weibo.meishijie.mvp.view.activity;
 
+import android.Manifest;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseActivity;
 import com.weibo.meishijie.mvp.view.fragment.DiscoveryFragment;
@@ -13,6 +16,9 @@ import com.weibo.meishijie.mvp.view.fragment.MineFragment;
 import com.weibo.meishijie.mvp.view.fragment.RecommendFragment;
 import com.weibo.meishijie.mvp.view.fragment.StoreFragment;
 import com.weibo.meishijie.mvp.view.fragment.TopicFragment;
+import com.weibo.meishijie.util.LogUtils;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Administrator on 2017/12/19.
@@ -31,6 +37,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void listener() {
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.requestEach(Manifest.permission_group.STORAGE)
+                .compose(bindToLifecycle())
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+                        LogUtils.d(permission.granted);
+                    }
+                });
         fm = getSupportFragmentManager();
         RxRadioGroup.checkedChanges(rb_bottom_navbar)
                 .compose(this.<Integer>bindToLifecycle())

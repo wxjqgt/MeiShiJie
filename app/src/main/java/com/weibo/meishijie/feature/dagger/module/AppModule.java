@@ -1,9 +1,8 @@
 package com.weibo.meishijie.feature.dagger.module;
 
-import android.os.Environment;
-
 import com.weibo.meishijie.api.MeiShiJieApiService;
 import com.weibo.meishijie.api.MeiShiJieCacheApiService;
+import com.weibo.meishijie.app.MeishijieApplication;
 import com.weibo.meishijie.util.Constant;
 
 import java.io.File;
@@ -58,8 +57,9 @@ public class AppModule {
     @Singleton
     @Provides
     public RxCache providesRxCache() {
-        String cacheDirPath = Environment.getDownloadCacheDirectory().getPath() + "/meishijiecache";
+        String cacheDirPath = MeishijieApplication.getContext().getFilesDir().getPath() + "/meishijie";
         File cacheDir = new File(cacheDirPath);
+        cacheDir.mkdirs();
         return new RxCache.Builder()
                 .persistence(cacheDir, new GsonSpeaker());
     }
