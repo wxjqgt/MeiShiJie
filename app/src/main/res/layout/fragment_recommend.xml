@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.weibo.meishijie.mvp.view.fragment.RecommendFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="recommend"
-        />
+    <include layout="@layout/recommend_navitem"/>
 
 </FrameLayout>
