@@ -75,7 +75,7 @@ public final class LogUtils {
     private static String sFilePrefix = "util";// log 文件前缀
     private static boolean sLogSwitch = true;  // log 总开关，默认开
     private static boolean sLog2ConsoleSwitch = true;  // logcat 是否打印，默认打印
-    private static String sGlobalTag = "JokeEassay";  // log 标签
+    private static String sGlobalTag = "MeiShiJie";  // log 标签
     private static boolean sTagIsSpace = true;  // log 标签是否为空白
     private static boolean sLogHeadSwitch = true;  // log 头部开关，默认开
     private static boolean sLog2FileSwitch = false; // log 写入文件开关，默认关

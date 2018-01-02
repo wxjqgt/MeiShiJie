@@ -29,4 +29,11 @@ public class NavItems {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "NavItems{" +
+                "title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

@@ -37,6 +37,11 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
+    protected void loadData() {
+        recommendPresenter.onStart();
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.fragment_recommend;
     }
