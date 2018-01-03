@@ -1,7 +1,7 @@
 package com.weibo.meishijie.di.module;
 
-import com.weibo.meishijie.api.MeiShiJieApiService;
-import com.weibo.meishijie.api.MeiShiJieCacheApiService;
+import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
+import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
 import com.weibo.meishijie.app.MeishijieApplication;
 import com.weibo.meishijie.util.Constant;
 

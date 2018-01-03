@@ -1,4 +1,4 @@
-package com.weibo.meishijie.bean.home_recommend;
+package com.weibo.meishijie.mvp.model.entities.home_recommend;
 
 import com.google.gson.annotations.SerializedName;
 

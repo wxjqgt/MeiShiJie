@@ -1,11 +1,9 @@
 package com.weibo.meishijie.mvp.presenter;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.weibo.meishijie.bean.home_recommend.Data;
-import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-
-import javax.inject.Inject;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.Data;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
 
 /**
  * Created by Administrator on 2017/12/29.
@@ -15,11 +13,11 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
 
     private RecommendContract.RecommendView recommendView;
 
-    @Inject
     RecommendContract.RecommendModel recommendModel;
 
-    public RecommendPresenterImlp(RecommendContract.RecommendView recommendView) {
+    public RecommendPresenterImlp(RecommendContract.RecommendModel recommendModel,RecommendContract.RecommendView recommendView) {
         this.recommendView = recommendView;
+        this.recommendModel = recommendModel;
     }
 
     @Override

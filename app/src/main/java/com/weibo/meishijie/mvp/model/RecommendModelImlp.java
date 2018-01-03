@@ -1,10 +1,10 @@
 package com.weibo.meishijie.mvp.model;
 
 import com.weibo.meishijie.app.MeishijieApplication;
-import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.api.MeiShiJieApiService;
-import com.weibo.meishijie.api.MeiShiJieCacheApiService;
+import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
+import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
 
 import javax.inject.Inject;
 

@@ -3,11 +3,11 @@ package com.weibo.meishijie.mvp.view.fragment;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseFragment;
-import com.weibo.meishijie.bean.home_recommend.NavItems;
-import com.weibo.meishijie.bean.home_recommend.Recipes;
-import com.weibo.meishijie.bean.home_recommend.Sancan;
-import com.weibo.meishijie.bean.home_recommend.TodayRecommend;
-import com.weibo.meishijie.bean.home_recommend.Zhuanti;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.NavItems;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.Recipes;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.Sancan;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.TodayRecommend;
+import com.weibo.meishijie.mvp.model.entities.home_recommend.Zhuanti;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.util.LogUtils;
 
