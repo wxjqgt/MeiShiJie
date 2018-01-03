@@ -1,9 +1,13 @@
 package com.weibo.meishijie.mvp.presenter;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.OnLifecycleEvent;
+
 import com.weibo.meishijie.feature.rx.RxUtil;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.mvp.model.entities.home_recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
+import com.weibo.meishijie.util.LogUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -16,8 +20,7 @@ import io.rx_cache2.Reply;
 public class RecommendPresenterImlp implements RecommendContract.RecommendPresenter, RecommendContract.LoadListener {
 
     private RecommendContract.RecommendView recommendView;
-
-    RecommendContract.RecommendModel recommendModel;
+    private RecommendContract.RecommendModel recommendModel;
 
     public RecommendPresenterImlp(RecommendContract.RecommendModel recommendModel, RecommendContract.RecommendView recommendView) {
         this.recommendView = recommendView;
@@ -49,6 +52,11 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     @Override
     public void onDestroy() {
 
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public void l(){
+        LogUtils.e("oncreate");
     }
 
 }
