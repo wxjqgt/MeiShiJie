@@ -5,5 +5,5 @@ package com.weibo.meishijie.base;
  */
 
 public interface BaseModel {
-    void load();
+
 }
