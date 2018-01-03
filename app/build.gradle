@@ -61,4 +61,5 @@ dependencies {
     implementation rootProject.ext.rxcache
     implementation rootProject.ext.rxcache_gson
     //magicindicator
+    implementation project(':magicindicator')
 }

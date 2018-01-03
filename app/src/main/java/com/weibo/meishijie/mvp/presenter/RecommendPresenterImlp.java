@@ -3,8 +3,6 @@ package com.weibo.meishijie.mvp.presenter;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.weibo.meishijie.bean.home_recommend.Data;
 import com.weibo.meishijie.bean.home_recommend.HomeRecommend;
-import com.weibo.meishijie.feature.dagger.component.DaggerRecommendModelComponent;
-import com.weibo.meishijie.feature.dagger.module.RecommendModelModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 
 import javax.inject.Inject;
@@ -22,10 +20,6 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
 
     public RecommendPresenterImlp(RecommendContract.RecommendView recommendView) {
         this.recommendView = recommendView;
-        DaggerRecommendModelComponent.builder()
-                .recommendModelModule(new RecommendModelModule(this))
-                .build()
-                .inject(this);
     }
 
     @Override

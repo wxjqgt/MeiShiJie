@@ -3,7 +3,7 @@ package com.weibo.meishijie.app;
 import android.app.Application;
 import android.content.Context;
 
-import com.weibo.meishijie.feature.dagger.component.AppComponent;
+import com.weibo.meishijie.dagger.component.AppComponent;
 import com.weibo.meishijie.feature.dagger.component.DaggerAppComponent;
 
 /**

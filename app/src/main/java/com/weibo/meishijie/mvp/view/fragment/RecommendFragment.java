@@ -8,10 +8,10 @@ import com.weibo.meishijie.bean.home_recommend.Recipes;
 import com.weibo.meishijie.bean.home_recommend.Sancan;
 import com.weibo.meishijie.bean.home_recommend.TodayRecommend;
 import com.weibo.meishijie.bean.home_recommend.Zhuanti;
-import com.weibo.meishijie.feature.dagger.component.DaggerRecommendPresenterComponent;
-import com.weibo.meishijie.feature.dagger.module.RecommendPresenterModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.util.LogUtils;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
 
 import java.util.List;
 
@@ -23,12 +23,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Inject
     RecommendContract.RecommendPresenter recommendPresenter;
+    private MagicIndicator nav_indicator;
 
     public RecommendFragment() {
-        DaggerRecommendPresenterComponent.builder()
-                .recommendPresenterModule(new RecommendPresenterModule(this))
-                .build()
-                .inject(this);
+
     }
 
     public static RecommendFragment newInstance() {
@@ -37,7 +35,44 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
+    protected void findView() {
+        nav_indicator = find(R.id.nav_indicator);
+    }
+
+    @Override
     protected void loadData() {
+       /* CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return mTitleDataList == null ? 0 : mTitleDataList.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
+                colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
+                colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
+                colorTransitionPagerTitleView.setText(mTitleDataList.get(index));
+                colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return colorTransitionPagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+                return indicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator);*/
+
         recommendPresenter.onStart();
     }
 
