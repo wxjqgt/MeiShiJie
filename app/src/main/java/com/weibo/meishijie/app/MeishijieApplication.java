@@ -3,8 +3,8 @@ package com.weibo.meishijie.app;
 import android.app.Application;
 import android.content.Context;
 
-import com.weibo.meishijie.dagger.component.AppComponent;
-import com.weibo.meishijie.feature.dagger.component.DaggerAppComponent;
+import com.weibo.meishijie.di.component.AppComponent;
+import com.weibo.meishijie.di.component.DaggerAppComponent;
 
 /**
  * Created by 美貌与智慧并重的男子 on 2016/7/30.
