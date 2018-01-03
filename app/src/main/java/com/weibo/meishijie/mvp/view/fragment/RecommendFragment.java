@@ -3,6 +3,8 @@ package com.weibo.meishijie.mvp.view.fragment;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseFragment;
+import com.weibo.meishijie.di.component.DaggerRecommendComponent;
+import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.mvp.model.entities.home_recommend.NavItems;
 import com.weibo.meishijie.mvp.model.entities.home_recommend.Recipes;
 import com.weibo.meishijie.mvp.model.entities.home_recommend.Sancan;
@@ -26,7 +28,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     private MagicIndicator nav_indicator;
 
     public RecommendFragment() {
-
+        DaggerRecommendComponent.builder()
+                .recommendModule(new RecommendModule(this))
+                .build()
+                .inject(this);
     }
 
     public static RecommendFragment newInstance() {

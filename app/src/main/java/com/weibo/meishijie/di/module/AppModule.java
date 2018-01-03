@@ -1,8 +1,9 @@
 package com.weibo.meishijie.di.module;
 
+import android.app.Application;
+
 import com.weibo.meishijie.mvp.model.api.MeiShiJieApiService;
 import com.weibo.meishijie.mvp.model.api.MeiShiJieCacheApiService;
-import com.weibo.meishijie.app.MeishijieApplication;
 import com.weibo.meishijie.util.Constant;
 
 import java.io.File;
@@ -25,27 +26,39 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class AppModule {
 
+    private Application application;
+
+    public AppModule(Application application){
+        this.application = application;
+    }
+
+    @Provides
+    @Singleton
+    Application providesApplication(){
+        return application;
+    }
+
     @Singleton
     @Provides
-    public MeiShiJieApiService providesMeiShiJieApiService(Retrofit retrofit) {
+    MeiShiJieApiService providesMeiShiJieApiService(Retrofit retrofit) {
         return retrofit.create(MeiShiJieApiService.class);
     }
 
     @Singleton
     @Provides
-    public MeiShiJieCacheApiService providesMeiShiJieCacheApiService(RxCache rxCache) {
+    MeiShiJieCacheApiService providesMeiShiJieCacheApiService(RxCache rxCache) {
         return rxCache.using(MeiShiJieCacheApiService.class);
     }
 
     @Singleton
     @Provides
-    public OkHttpClient providesOkHttpClient() {
+    OkHttpClient providesOkHttpClient() {
         return new OkHttpClient.Builder().build();
     }
 
     @Singleton
     @Provides
-    public Retrofit providesRetrofit(OkHttpClient okHttpClient) {
+    Retrofit providesRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -56,11 +69,12 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public RxCache providesRxCache() {
-        String cacheDirPath = MeishijieApplication.getContext().getFilesDir().getPath() + "/meishijie";
+    RxCache providesRxCache() {
+        String cacheDirPath = application.getFilesDir().getPath() + "/meishijie";
         File cacheDir = new File(cacheDirPath);
         cacheDir.mkdirs();
         return new RxCache.Builder()
                 .persistence(cacheDir, new GsonSpeaker());
     }
+
 }
