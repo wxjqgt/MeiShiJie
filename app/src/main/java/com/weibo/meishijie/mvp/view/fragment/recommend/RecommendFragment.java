@@ -14,7 +14,7 @@ import com.weibo.meishijie.base.BaseFragment;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
 import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -62,7 +62,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
-    public void showData(HomeRecommend homeRecommend) {
+    public void showData(Data data) {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(Recommend_recommendFragment.newInstance());
         fragmentList.add(SmartMakeDishesFragment.newInstance());
@@ -71,7 +71,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
 
         CommonNavigator commonNavigator = new CommonNavigator(context);
-        commonNavigator.setAdapter(new RecommendNavItemAdapter(homeRecommend.getData().getNav_items(), this));
+        commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
         nav_indicator.setNavigator(commonNavigator);
 
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);

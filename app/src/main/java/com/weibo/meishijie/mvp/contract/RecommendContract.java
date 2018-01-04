@@ -3,6 +3,7 @@ package com.weibo.meishijie.mvp.contract;
 import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.base.BasePresenter;
 import com.weibo.meishijie.base.BaseView;
+import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
 
 import io.reactivex.Observable;
@@ -17,7 +18,7 @@ public class RecommendContract {
     }
 
     public interface RecommendView extends BaseView {
-        void showData(HomeRecommend homeRecommend);
+        void showData(Data data);
     }
 
     public interface RecommendModel extends BaseModel {

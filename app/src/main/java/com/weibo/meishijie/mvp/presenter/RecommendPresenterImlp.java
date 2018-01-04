@@ -35,11 +35,7 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
                     @Override
                     public void accept(HomeRecommend homeRecommend) throws Exception {
                         Data data = homeRecommend.getData();
-                        recommendView.loadNavItems(data.getNav_items());
-                        recommendView.loadRecipes(data.getRecipes());
-                        recommendView.loadSancan(data.getSancan());
-                        recommendView.loadTodayRecommend(data.getToday_recommend());
-                        recommendView.loadZhuanti(data.getZhuanti());
+                        recommendView.showData(data);
                     }
                 });
     }

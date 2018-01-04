@@ -11,6 +11,7 @@ import com.weibo.meishijie.base.BaseFragment;
  */
 
 public class Recommend_recommendFragment extends BaseFragment {
+
     @Override
     protected int getLayoutId() {
         return R.layout.recommend_recommend;
@@ -20,4 +21,7 @@ public class Recommend_recommendFragment extends BaseFragment {
         Recommend_recommendFragment fragment = new Recommend_recommendFragment();
         return fragment;
     }
+
+
+
 }
