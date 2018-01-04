@@ -7,7 +7,6 @@ import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
-import io.rx_cache2.Reply;
 
 /**
  * Created by Administrator on 2017/12/29.
@@ -29,13 +28,13 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     }
 
     @Override
-    public void loadHomeRecommendData(Observable<Reply<HomeRecommend>> result) {
+    public void loadHomeRecommendData(Observable<HomeRecommend> result) {
         result.compose(recommendView.bindLifecycle())
                 .compose(RxUtil.io_mainO())
-                .subscribe(new Consumer<Reply<HomeRecommend>>() {
+                .subscribe(new Consumer<HomeRecommend>() {
                     @Override
-                    public void accept(Reply<HomeRecommend> homeRecommend) throws Exception {
-                        Data data = homeRecommend.getData().getData();
+                    public void accept(HomeRecommend homeRecommend) throws Exception {
+                        Data data = homeRecommend.getData();
                         recommendView.loadNavItems(data.getNav_items());
                         recommendView.loadRecipes(data.getRecipes());
                         recommendView.loadSancan(data.getSancan());

@@ -29,7 +29,7 @@ public class RecommendModelImlp implements RecommendContract.RecommendModel {
 
     @Override
     public void load(RecommendContract.LoadListener loadListener, boolean refresh) {
-        Observable<Reply<HomeRecommend>> result = meiShiJieCacheApiService.requestHomeRecommendData(
+        Observable<HomeRecommend> result = meiShiJieCacheApiService.requestHomeRecommendData(
                 meiShiJieApiService.requestHomeRecommendData(),
                 new EvictProvider(true));
         loadListener.loadHomeRecommendData(result);

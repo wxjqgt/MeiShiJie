@@ -14,11 +14,7 @@ import com.weibo.meishijie.base.BaseFragment;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
 import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.NavItems;
-import com.weibo.meishijie.mvp.model.entities.recommend.Recipes;
-import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
-import com.weibo.meishijie.mvp.model.entities.recommend.TodayRecommend;
-import com.weibo.meishijie.mvp.model.entities.recommend.Zhuanti;
+import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -29,7 +25,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView,RecommendNavItemAdapter.ItemClickListener {
+public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView, RecommendNavItemAdapter.ItemClickListener {
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject
@@ -66,39 +62,19 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
-    public void loadNavItems(List<NavItems> navItemsList) {
+    public void showData(HomeRecommend homeRecommend) {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(Recommend_recommendFragment.newInstance());
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
-        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(),fragmentList));
+        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
 
         CommonNavigator commonNavigator = new CommonNavigator(context);
-        commonNavigator.setAdapter(new RecommendNavItemAdapter(navItemsList,this));
+        commonNavigator.setAdapter(new RecommendNavItemAdapter(homeRecommend.getData().getNav_items(), this));
         nav_indicator.setNavigator(commonNavigator);
 
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);
-    }
-
-    @Override
-    public void loadRecipes(List<Recipes> recipesList) {
-
-    }
-
-    @Override
-    public void loadSancan(List<Sancan> sancan) {
-
-    }
-
-    @Override
-    public void loadTodayRecommend(TodayRecommend todayRecommend) {
-
-    }
-
-    @Override
-    public void loadZhuanti(Zhuanti zhuanti) {
-
     }
 
     @Override
@@ -115,5 +91,6 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     public void onDestroy() {
         super.onDestroy();
         presenter.onDestroy();
+        presenter = null;
     }
 }

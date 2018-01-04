@@ -11,7 +11,6 @@ import io.rx_cache2.EvictProvider;
 import io.rx_cache2.LifeCache;
 import io.rx_cache2.Migration;
 import io.rx_cache2.ProviderKey;
-import io.rx_cache2.Reply;
 import io.rx_cache2.SchemeMigration;
 
 /**
@@ -29,5 +28,5 @@ public interface MeiShiJieCacheApiService {
     @ProviderKey("request_home_recommend_data")
     @Encrypt
     @LifeCache(duration = 3, timeUnit = TimeUnit.MINUTES)
-    Observable<Reply<HomeRecommend>> requestHomeRecommendData(Observable<HomeRecommend> homeRecommendObservable, EvictProvider evictProvider);
+    Observable<HomeRecommend> requestHomeRecommendData(Observable<HomeRecommend> homeRecommendObservable, EvictProvider evictProvider);
 }
