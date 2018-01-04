@@ -30,6 +30,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     protected Context context;
     private View view;
 
+    @NonNull
     @LayoutRes
     protected abstract int getLayoutId();
 

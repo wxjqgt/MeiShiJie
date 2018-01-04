@@ -1,5 +1,6 @@
 package com.weibo.meishijie.mvp.view.fragment.recommend;
 
+import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseFragment;
 
 /**
@@ -12,7 +13,7 @@ import com.weibo.meishijie.base.BaseFragment;
 public class RecipeClassificationFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.recipe_classification;
     }
 
     public static RecipeClassificationFragment newInstance() {

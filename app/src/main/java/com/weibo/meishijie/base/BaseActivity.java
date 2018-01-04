@@ -6,12 +6,15 @@ import android.support.annotation.Nullable;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by Administrator on 2017/12/6.
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity {
 
+    @NotNull
     @LayoutRes
     protected abstract int getLayoutId();
 
