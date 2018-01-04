@@ -1,6 +1,6 @@
 package com.weibo.meishijie.mvp.model.api;
 
-import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;

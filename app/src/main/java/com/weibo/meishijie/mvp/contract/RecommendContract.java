@@ -3,12 +3,12 @@ package com.weibo.meishijie.mvp.contract;
 import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.base.BasePresenter;
 import com.weibo.meishijie.base.BaseView;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.NavItems;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.Recipes;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.Sancan;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.TodayRecommend;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.Zhuanti;
+import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.NavItems;
+import com.weibo.meishijie.mvp.model.entities.recommend.Recipes;
+import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
+import com.weibo.meishijie.mvp.model.entities.recommend.TodayRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Zhuanti;
 
 import java.util.List;
 

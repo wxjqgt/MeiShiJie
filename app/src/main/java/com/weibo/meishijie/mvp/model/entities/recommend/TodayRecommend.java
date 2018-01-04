@@ -1,4 +1,4 @@
-package com.weibo.meishijie.mvp.model.entities.home_recommend;
+package com.weibo.meishijie.mvp.model.entities.recommend;
 
 import java.util.List;
 

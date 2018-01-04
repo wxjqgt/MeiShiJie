@@ -2,8 +2,8 @@ package com.weibo.meishijie.mvp.presenter;
 
 import com.weibo.meishijie.feature.rx.RxUtil;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.Data;
-import com.weibo.meishijie.mvp.model.entities.home_recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Data;
+import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

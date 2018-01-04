@@ -1,4 +1,4 @@
-package com.weibo.meishijie.mvp.model.entities.home_recommend;
+package com.weibo.meishijie.mvp.model.entities.recommend;
 
 /**
  * Created by Administrator on 2017/12/27.

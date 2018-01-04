@@ -17,6 +17,8 @@ import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
@@ -24,9 +26,12 @@ import io.reactivex.subjects.BehaviorSubject;
  * Created by Administrator on 2017/12/7.
  */
 
-public abstract class BaseFragment extends Fragment implements LifecycleProvider<FragmentEvent> {
+public abstract class BaseFragment<T> extends Fragment implements LifecycleProvider<FragmentEvent> {
 
     protected final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
+    @Inject
+    protected T presenter;
+    protected Context context;
     private View view;
 
     @LayoutRes
@@ -68,6 +73,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         lifecycleSubject.onNext(FragmentEvent.ATTACH);
     }
 
