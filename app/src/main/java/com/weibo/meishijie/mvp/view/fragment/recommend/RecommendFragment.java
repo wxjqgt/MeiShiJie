@@ -30,6 +30,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject
     protected RecommendContract.RecommendPresenter presenter;
+    private RecommendContract.ShowListener showListener;
     private MagicIndicator nav_indicator;
     private ViewPager nav_viewpager;
 
@@ -63,8 +64,14 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     public void showData(Data data) {
+        RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
+        showListener = recommendRecommendFragment;
+        showListener.showRecipes(data.getRecipes());
+        showListener.showSancan(data.getSancan());
+        showListener.showTodayRecommend(data.getToday_recommend());
+        showListener.showZhuanti(data.getZhuanti());
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(Recommend_recommendFragment.newInstance());
+        fragmentList.add(recommendRecommendFragment);
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
