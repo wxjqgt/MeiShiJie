@@ -7,5 +7,5 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
  */
 
 public interface BaseView {
-    <T> LifecycleTransformer<T> bindToRxLifecycle();
+    <T> LifecycleTransformer<T> bindLifecycle();
 }

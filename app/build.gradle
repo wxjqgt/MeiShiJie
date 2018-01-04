@@ -60,6 +60,12 @@ dependencies {
     //rxcahce
     implementation rootProject.ext.rxcache
     implementation rootProject.ext.rxcache_gson
+    //
+    implementation rootProject.ext.archRuntime
+    implementation rootProject.ext.archExtension
+    implementation rootProject.ext.archCompiler
+    implementation rootProject.ext.roomRuntime
+    implementation rootProject.ext.roomCompiler
     //magicindicator
     implementation project(':magicindicator')
 }
