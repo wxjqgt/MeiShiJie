@@ -2,7 +2,7 @@ package com.weibo.meishijie.di.component;
 
 import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.di.scope.FragmentScope;
-import com.weibo.meishijie.mvp.view.fragment.RecommendFragment;
+import com.weibo.meishijie.mvp.view.fragment.recommend.RecommendFragment;
 
 import dagger.Component;
 

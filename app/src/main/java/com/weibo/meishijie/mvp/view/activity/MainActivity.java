@@ -10,9 +10,9 @@ import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseActivity;
 import com.weibo.meishijie.mvp.view.fragment.DiscoveryFragment;
 import com.weibo.meishijie.mvp.view.fragment.MineFragment;
-import com.weibo.meishijie.mvp.view.fragment.RecommendFragment;
 import com.weibo.meishijie.mvp.view.fragment.StoreFragment;
 import com.weibo.meishijie.mvp.view.fragment.TopicFragment;
+import com.weibo.meishijie.mvp.view.fragment.recommend.RecommendFragment;
 
 /**
  * Created by Administrator on 2017/12/19.

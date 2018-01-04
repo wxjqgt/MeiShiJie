@@ -1,4 +1,4 @@
-package com.weibo.meishijie.mvp.view.fragment;
+package com.weibo.meishijie.mvp.view.fragment.recommend;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -29,9 +29,13 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorT
 
 import java.util.List;
 
-public class RecommendFragment extends BaseFragment<RecommendContract.RecommendPresenter> implements RecommendContract.RecommendView {
+import javax.inject.Inject;
+
+public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView {
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
+    @Inject
+    protected RecommendContract.RecommendPresenter presenter;
     private MagicIndicator nav_indicator;
     private ViewPager nav_viewpager;
 
