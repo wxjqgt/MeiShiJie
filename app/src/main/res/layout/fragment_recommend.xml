@@ -1,9 +1,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.weibo.meishijie.mvp.view.fragment.RecommendFragment">
+    tools:context="com.weibo.meishijie.mvp.view.fragment.recommend.RecommendFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/recommend_add" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="菜谱、食材" />
+
+        <ImageView
+            android:id="@+id/im_message"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/recommend_message" />
+
+    </LinearLayout>
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/nav_indicator"

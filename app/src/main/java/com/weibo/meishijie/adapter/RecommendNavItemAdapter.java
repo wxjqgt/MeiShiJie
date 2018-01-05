@@ -36,7 +36,7 @@ public class RecommendNavItemAdapter extends CommonNavigatorAdapter {
     public IPagerTitleView getTitleView(Context context, final int index) {
         ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
         colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
-        colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
+        colorTransitionPagerTitleView.setSelectedColor(Color.RED);
         colorTransitionPagerTitleView.setText(navItemsList.get(index).getTitle());
         colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +50,7 @@ public class RecommendNavItemAdapter extends CommonNavigatorAdapter {
     @Override
     public IPagerIndicator getIndicator(Context context) {
         LinePagerIndicator indicator = new LinePagerIndicator(context);
+        indicator.setColors(Color.RED);
         indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
         return indicator;
     }
