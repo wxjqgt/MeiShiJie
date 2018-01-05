@@ -35,6 +35,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject
     protected RecommendContract.RecommendPresenter presenter;
+    List<Fragment> fragmentList;
     private MagicIndicator nav_indicator;
     private ViewPager nav_viewpager;
     private TextView tv_search;
@@ -60,36 +61,26 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     protected void loadData() {
+        fragmentList = new ArrayList<>();
+        RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
+        presenter.addObservable(recommendRecommendFragment);
+        fragmentList.add(recommendRecommendFragment);
+        fragmentList.add(SmartMakeDishesFragment.newInstance());
+        fragmentList.add(RecipeClassificationFragment.newInstance());
+        fragmentList.add(PeopleRaidersFragment.newInstance());
+        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
+        SpannableString spannableString = new SpannableString("图片 菜谱、食材");
+        spannableString.setSpan(new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon)), 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv_search.setText(spannableString);
         presenter.onStart();
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_recommend;
-    }
-
-    @Override
     public void showData(Data data) {
-        SpannableString spannableString = new SpannableString("图片 菜谱、食材");
-        spannableString.setSpan(new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon)), 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        tv_search.setText(spannableString);
-
-        List<Fragment> fragmentList = new ArrayList<>();
-
-        RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
-        presenter.addObservable(recommendRecommendFragment);
-        fragmentList.add(recommendRecommendFragment);
-
-        fragmentList.add(SmartMakeDishesFragment.newInstance());
-        fragmentList.add(RecipeClassificationFragment.newInstance());
-        fragmentList.add(PeopleRaidersFragment.newInstance());
-
-        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
-
         CommonNavigator commonNavigator = new CommonNavigator(context);
+        commonNavigator.setAdjustMode(true);
         commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
         nav_indicator.setNavigator(commonNavigator);
-
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);
     }
 
@@ -101,6 +92,12 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     @Override
     public <T> LifecycleTransformer<T> bindLifecycle() {
         return RxLifecycleAndroid.bindFragment(lifecycleSubject);
+    }
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_recommend;
     }
 
     @Override

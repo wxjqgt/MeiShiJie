@@ -24,7 +24,6 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
         this.recommendModel = recommendModel;
         recommendViewList = new ArrayList<>(2);
         recommendViewList.add(recommendView);
-
     }
 
     @Override
@@ -41,10 +40,11 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     public void loadHomeRecommendData(Observable<Recommend> result) {
         result.compose(RxUtil.io_mainO())
                 .compose(recommendView.bindLifecycle())
-                .zipWith(Observable.fromIterable(recommendViewList), (recommend, recommendView) -> {
-                    recommendView.showData(recommend.getData());
-                    return Observable.just(recommend);
-                }).subscribe();
+                .subscribe(recommend -> {
+                    for (RecommendContract.RecommendView recommendView : recommendViewList) {
+                        recommendView.showData(recommend.getData());
+                    }
+                });
     }
 
     @Override

@@ -83,4 +83,16 @@ public class Data {
             this.recipes = recipes;
         }
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "hello_msg='" + hello_msg + '\'' +
+                ", search_hint='" + search_hint + '\'' +
+                ", today_recommend=" + today_recommend +
+                ", zhuanti=" + zhuanti +
+                ", nav_items=" + nav_items +
+                ", sancan=" + sancan +
+                ", recipes=" + recipes +
+                '}';
+    }
 }
