@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -20,12 +20,14 @@
             android:src="@mipmap/recommend_add" />
 
         <TextView
+            android:layout_margin="3dp"
+            android:id="@+id/tv_search"
             android:layout_width="0dp"
+            android:background="@drawable/recommend_search_tv"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
-            android:gravity="center"
-            android:text="菜谱、食材" />
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/im_message"

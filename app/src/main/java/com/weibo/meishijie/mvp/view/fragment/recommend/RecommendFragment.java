@@ -1,9 +1,14 @@
 package com.weibo.meishijie.mvp.view.fragment.recommend;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.view.View;
+import android.widget.TextView;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
@@ -32,6 +37,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     protected RecommendContract.RecommendPresenter presenter;
     private MagicIndicator nav_indicator;
     private ViewPager nav_viewpager;
+    private TextView tv_search;
 
     public RecommendFragment() {
         DaggerRecommendComponent.builder()
@@ -49,6 +55,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     protected void findView() {
         nav_indicator = find(R.id.nav_indicator);
         nav_viewpager = find(R.id.nav_viewpager);
+        tv_search = find(R.id.tv_search);
     }
 
     @Override
@@ -63,6 +70,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     public void showData(Data data) {
+        SpannableString spannableString = new SpannableString("图片 菜谱、食材");
+        spannableString.setSpan(new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon)), 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv_search.setText(spannableString);
+
         List<Fragment> fragmentList = new ArrayList<>();
 
         RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
