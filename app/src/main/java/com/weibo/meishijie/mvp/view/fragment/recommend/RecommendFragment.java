@@ -64,12 +64,15 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     @Override
     public void showData(Data data) {
         List<Fragment> fragmentList = new ArrayList<>();
+
         RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
         presenter.addObservable(recommendRecommendFragment);
         fragmentList.add(recommendRecommendFragment);
+
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
+
         nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
 
         CommonNavigator commonNavigator = new CommonNavigator(context);

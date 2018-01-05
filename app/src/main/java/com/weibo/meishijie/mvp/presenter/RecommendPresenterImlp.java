@@ -2,13 +2,12 @@ package com.weibo.meishijie.mvp.presenter;
 
 import com.weibo.meishijie.feature.rx.RxUtil;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 
 /**
  * Created by Administrator on 2017/12/29.
@@ -39,15 +38,12 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     }
 
     @Override
-    public void loadHomeRecommendData(Observable<HomeRecommend> result) {
+    public void loadHomeRecommendData(Observable<Recommend> result) {
         result.compose(RxUtil.io_mainO())
                 .compose(recommendView.bindLifecycle())
-                .zipWith(Observable.fromIterable(recommendViewList), new BiFunction<HomeRecommend, RecommendContract.RecommendView, Object>() {
-                    @Override
-                    public Object apply(HomeRecommend homeRecommend, RecommendContract.RecommendView recommendView) throws Exception {
-                        recommendView.showData(homeRecommend.getData());
-                        return null;
-                    }
+                .zipWith(Observable.fromIterable(recommendViewList), (recommend, recommendView) -> {
+                    recommendView.showData(recommend.getData());
+                    return Observable.just(recommend);
                 }).subscribe();
     }
 

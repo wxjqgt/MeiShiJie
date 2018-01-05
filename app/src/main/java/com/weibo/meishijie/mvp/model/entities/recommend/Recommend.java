@@ -4,7 +4,7 @@ package com.weibo.meishijie.mvp.model.entities.recommend;
  * Created by Administrator on 2017/12/27.
  */
 
-public class HomeRecommend {
+public class Recommend {
 
     /**
      * code : 1

@@ -4,7 +4,7 @@ import com.weibo.meishijie.base.BaseModel;
 import com.weibo.meishijie.base.BasePresenter;
 import com.weibo.meishijie.base.BaseView;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
-import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 
 import io.reactivex.Observable;
 
@@ -26,7 +26,7 @@ public class RecommendContract {
     }
 
     public interface LoadListener {
-        void loadHomeRecommendData(Observable<HomeRecommend> homeRecommend);
+        void loadHomeRecommendData(Observable<Recommend> homeRecommend);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.weibo.meishijie.mvp.model.api;
 
-import com.weibo.meishijie.mvp.model.entities.recommend.HomeRecommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +18,7 @@ import io.rx_cache2.SchemeMigration;
  */
 
 @SchemeMigration({
-        @Migration(version = 1, evictClasses = {HomeRecommend.class})
+        @Migration(version = 1, evictClasses = {Recommend.class})
 })
 @EncryptKey("meishijie_cache_provides")
 public interface MeiShiJieCacheApiService {
@@ -28,5 +28,5 @@ public interface MeiShiJieCacheApiService {
     @ProviderKey("request_home_recommend_data")
     @Encrypt
     @LifeCache(duration = 3, timeUnit = TimeUnit.MINUTES)
-    Observable<HomeRecommend> requestHomeRecommendData(Observable<HomeRecommend> homeRecommendObservable, EvictProvider evictProvider);
+    Observable<Recommend> requestHomeRecommendData(Observable<Recommend> homeRecommendObservable, EvictProvider evictProvider);
 }
