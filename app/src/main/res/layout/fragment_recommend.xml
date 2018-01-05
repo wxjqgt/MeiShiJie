@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@null"
     tools:context="com.weibo.meishijie.mvp.view.fragment.recommend.RecommendFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@null"
         android:orientation="horizontal">
 
         <ImageView
@@ -33,7 +35,7 @@
             android:id="@+id/im_message"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/recommend_message" />
 
