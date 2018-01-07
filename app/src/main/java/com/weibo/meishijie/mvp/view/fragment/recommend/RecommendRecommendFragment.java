@@ -29,6 +29,7 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     @Override
     public void showData(Data data) {
 
+
     }
 
     @Override
