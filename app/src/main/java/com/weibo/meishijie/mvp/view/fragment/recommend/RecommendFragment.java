@@ -92,7 +92,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     public void refresh() {
-
+        presenter.refresh();
     }
 
     @Override

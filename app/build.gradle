@@ -63,7 +63,7 @@ dependencies {
     //magicindicator
     implementation project(':magicindicator')
     //vLayout
-    implementation (rootProject.ext.vLayout) {
+    /*implementation (rootProject.ext.vLayout) {
         transitive = true
-    }
+    }*/
 }

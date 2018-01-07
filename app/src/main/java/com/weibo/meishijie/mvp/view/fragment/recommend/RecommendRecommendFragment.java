@@ -3,7 +3,6 @@ package com.weibo.meishijie.mvp.view.fragment.recommend;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
-import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
@@ -18,7 +17,7 @@ import java.util.List;
  * @author 韦大帅
  */
 
-public class RecommendRecommendFragment extends BaseFragment implements RecommendContract.LoadDataListener, SwipeRefreshLayout.OnRefreshListener{
+public class RecommendRecommendFragment extends BaseFragment implements RecommendContract.LoadDataListener, SwipeRefreshLayout.OnRefreshListener {
 
     private RecommendContract.RefreshListener refreshListener;
     private RecyclerView rv_recommendRecommend;
@@ -31,12 +30,12 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     }
 
     @Override
+    protected void listener() {
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
     public void loadSancan(List<Sancan> sancanList) {
-        VirtualLayoutManager layoutManager = new VirtualLayoutManager(context);
-        rv_recommendRecommend.setLayoutManager(layoutManager);
-        RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-        rv_recommendRecommend.setRecycledViewPool(viewPool);
-        viewPool.setMaxRecycledViews(0, 10);
 
     }
 
