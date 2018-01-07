@@ -14,7 +14,7 @@ import io.reactivex.Observable;
 
 public class RecommendContract {
     public interface RecommendPresenter extends BasePresenter {
-        void addObservable(RecommendView recommendView);
+
     }
 
     public interface RecommendView extends BaseView {
