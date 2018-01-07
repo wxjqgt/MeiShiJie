@@ -7,7 +7,7 @@ import android.widget.RadioGroup;
 
 import com.jakewharton.rxbinding2.widget.RxRadioGroup;
 import com.weibo.meishijie.R;
-import com.weibo.meishijie.base.BaseActivity;
+import com.weibo.meishijie.mvp.base.BaseActivity;
 import com.weibo.meishijie.mvp.view.fragment.DiscoveryFragment;
 import com.weibo.meishijie.mvp.view.fragment.MineFragment;
 import com.weibo.meishijie.mvp.view.fragment.StoreFragment;

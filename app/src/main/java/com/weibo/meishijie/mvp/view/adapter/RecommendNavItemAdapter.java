@@ -1,4 +1,4 @@
-package com.weibo.meishijie.adapter;
+package com.weibo.meishijie.mvp.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

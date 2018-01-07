@@ -30,8 +30,13 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
         result.compose(RxUtil.io_mainO())
                 .compose(recommendView.bindLifecycle())
                 .subscribe(recommend -> {
-                        recommendView.showData(recommend.getData());
+                        recommendView.loadData(recommend.getData());
                 });
+    }
+
+    @Override
+    public void refresh() {
+        recommendModel.load(this,true);
     }
 
     @Override

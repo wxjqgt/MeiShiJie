@@ -18,6 +18,7 @@ ext{
     rxpermissions_version       = '0.9.4'
     rxcache_version             = '1.8.2-2.x'
     rxcache_needgson_version    = '0.0.3'
+    vLayout_version             = '1.2.6@aar'
 
     minSdkVersion               = 15
     compileSdkVersion           = 26
@@ -38,6 +39,8 @@ ext{
     supportTestRunner           = "com.android.support.test:runner:$runner_version"
     supportTestEspresso         = "com.android.support.test.espresso:espresso-core:$espresso_version"
     supportTestEspressoContrib  = "com.android.support.test.espresso:espresso-contrib:$espresso_version"
+
+    vLayout                     = "com.alibaba.android:vlayout:$vLayout_version"
 
     rxJava                      = "io.reactivex.rxjava2:rxjava:$rxjava_version"
     rxAndroid                   = "io.reactivex.rxjava2:rxandroid:$rxandroid_version"

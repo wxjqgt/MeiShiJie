@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
-import com.weibo.meishijie.adapter.FragmentAdapter;
-import com.weibo.meishijie.adapter.RecommendNavItemAdapter;
-import com.weibo.meishijie.base.BaseFragment;
+import com.weibo.meishijie.mvp.view.adapter.FragmentAdapter;
+import com.weibo.meishijie.mvp.view.adapter.RecommendNavItemAdapter;
+import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
 import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
@@ -47,11 +47,6 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
                 .inject(this);
     }
 
-    public static RecommendFragment newInstance() {
-        RecommendFragment fragment = new RecommendFragment();
-        return fragment;
-    }
-
     @Override
     protected void findView() {
         nav_indicator = find(R.id.nav_indicator);
@@ -65,7 +60,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
-    public void showData(Data data) {
+    public void loadData(Data data) {
         SpannableString spannableString = new SpannableString("图片 菜谱、食材");
         spannableString.setSpan(new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon)), 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_search.setText(spannableString);
@@ -105,6 +100,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         return RxLifecycleAndroid.bindFragment(lifecycleSubject);
     }
 
+    public static RecommendFragment newInstance() {
+        RecommendFragment fragment = new RecommendFragment();
+        return fragment;
+    }
 
     @Override
     protected int getLayoutId() {

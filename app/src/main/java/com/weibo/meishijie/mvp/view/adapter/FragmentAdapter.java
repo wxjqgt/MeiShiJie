@@ -1,4 +1,4 @@
-package com.weibo.meishijie.adapter;
+package com.weibo.meishijie.mvp.view.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

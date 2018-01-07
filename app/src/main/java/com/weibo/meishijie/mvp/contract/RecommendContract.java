@@ -1,8 +1,8 @@
 package com.weibo.meishijie.mvp.contract;
 
-import com.weibo.meishijie.base.BaseModel;
-import com.weibo.meishijie.base.BasePresenter;
-import com.weibo.meishijie.base.BaseView;
+import com.weibo.meishijie.mvp.base.BaseModel;
+import com.weibo.meishijie.mvp.base.BasePresenter;
+import com.weibo.meishijie.mvp.base.BaseView;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
@@ -13,13 +13,17 @@ import io.reactivex.Observable;
 
 /**
  * 管理所有在这个模块中用到的契约
+ *
  * @author 韦大帅
- * Created by Administrator on 2017/12/29.
+ *         Created by Administrator on 2017/12/29.
  */
 
 public class RecommendContract {
     public interface RecommendPresenter extends BasePresenter {
-
+        /**
+         * 刷新数据的方法
+         */
+        void refresh();
     }
 
     public interface RecommendView extends BaseView {
@@ -28,7 +32,7 @@ public class RecommendContract {
          *
          * @param data
          */
-        void showData(Data data);
+        void loadData(Data data);
     }
 
     public interface RecommendModel extends BaseModel {

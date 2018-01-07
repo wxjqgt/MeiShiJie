@@ -1,4 +1,4 @@
-package com.weibo.meishijie.base;
+package com.weibo.meishijie.mvp.base;
 
 import android.arch.lifecycle.LifecycleObserver;
 
