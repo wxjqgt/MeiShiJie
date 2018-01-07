@@ -1,11 +1,11 @@
 package com.weibo.meishijie.mvp.view.fragment.recommend;
 
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.Data;
+import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -14,7 +14,9 @@ import com.weibo.meishijie.mvp.model.entities.recommend.Data;
  * @author 韦大帅
  */
 
-public class RecommendRecommendFragment extends BaseFragment implements RecommendContract.RecommendView{
+public class RecommendRecommendFragment extends BaseFragment implements RecommendContract.LoadDataListener {
+
+    private RecommendContract.RefreshListener refreshListener;
 
     @Override
     protected int getLayoutId() {
@@ -26,15 +28,13 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
         return fragment;
     }
 
-    @Override
-    public void showData(Data data) {
-
-
+    public void setRefreshListener(RecommendContract.RefreshListener refreshListener){
+        this.refreshListener = refreshListener;
     }
 
     @Override
-    public <T> LifecycleTransformer<T> bindLifecycle() {
-        return RxLifecycleAndroid.bindFragment(lifecycleSubject);
+    public void loadSancan(List<Sancan> sancanList) {
+
     }
 
 }

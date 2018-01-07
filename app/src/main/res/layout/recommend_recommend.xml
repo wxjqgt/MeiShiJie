@@ -1,14 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh_recommendrecommend"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.weibo.meishijie.mvp.view.fragment.recommend.RecommendFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="recommend_recommend"
-        />
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

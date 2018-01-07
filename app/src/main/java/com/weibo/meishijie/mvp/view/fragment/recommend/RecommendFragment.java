@@ -30,7 +30,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView, RecommendNavItemAdapter.ItemClickListener {
+public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView,
+        RecommendNavItemAdapter.ItemClickListener,RecommendContract.RefreshListener {
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject
@@ -75,6 +76,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
         List<Fragment> fragmentList = new ArrayList<>();
         RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
+        recommendRecommendFragment.setRefreshListener(this);
         fragmentList.add(recommendRecommendFragment);
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
@@ -83,13 +85,19 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);
 
-        RecommendContract.RecommendView recommendRecommendView = recommendRecommendFragment;
-        recommendRecommendView.showData(data);
+        RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
+        loadDataListener.loadSancan(data.getSancan());
+
     }
 
     @Override
     public void onItemClick(View view, Context context, int index) {
         nav_viewpager.setCurrentItem(index);
+    }
+
+    @Override
+    public void refresh() {
+
     }
 
     @Override
