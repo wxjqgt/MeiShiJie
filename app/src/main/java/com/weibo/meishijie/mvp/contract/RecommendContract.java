@@ -5,17 +5,15 @@ import com.weibo.meishijie.mvp.base.BasePresenter;
 import com.weibo.meishijie.mvp.base.BaseView;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
-import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
 /**
  * 管理所有在这个模块中用到的契约
+ * <p>
+ * Created by Administrator on 2017/12/29.
  *
  * @author 韦大帅
- *         Created by Administrator on 2017/12/29.
  */
 
 public class RecommendContract {
@@ -68,9 +66,9 @@ public class RecommendContract {
      */
     public interface LoadDataListener {
         /**
-         * @param sancanList
+         * @param data
          * @return void
          */
-        void loadSancan(List<Sancan> sancanList);
+        void loadData(Data data);
     }
 }

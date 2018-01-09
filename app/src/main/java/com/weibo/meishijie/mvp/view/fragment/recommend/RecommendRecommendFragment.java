@@ -6,9 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
-
-import java.util.List;
+import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -35,7 +33,8 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     }
 
     @Override
-    public void loadSancan(List<Sancan> sancanList) {
+    public void loadData(Data data) {
+
 
     }
 

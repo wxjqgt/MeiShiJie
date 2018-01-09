@@ -81,7 +81,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);
 
         RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
-        loadDataListener.loadSancan(data.getSancan());
+        loadDataListener.loadData(data);
 
     }
 
