@@ -2,6 +2,7 @@ package net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.View;
@@ -38,8 +39,10 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
     private float mXOffset;
     private float mLineWidth;
     private float mRoundRadius;
+    private int mTriangleHeight;
+    private int mTriangleWidth;
 
-    private Paint mPaint;
+    private Paint mPaint, linePaint;
     private List<PositionData> mPositionDataList;
     private List<Integer> mColors;
 
@@ -51,15 +54,24 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
     }
 
     private void init(Context context) {
+        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        linePaint.setStyle(Paint.Style.FILL);
+        linePaint.setColor(Color.parseColor("#bfbfbf"));
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
         mLineHeight = UIUtil.dip2px(context, 3);
         mLineWidth = UIUtil.dip2px(context, 10);
+        mTriangleWidth = UIUtil.dip2px(context, 14);
+        mTriangleHeight = UIUtil.dip2px(context, 7);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawRoundRect(mLineRect, mRoundRadius, mRoundRadius, mPaint);
+        /**
+         * 给指示器下面再画一条横线
+         */
+        canvas.drawRect(0, getHeight() - mLineHeight - mYOffset, getWidth(), getHeight() - mYOffset - mLineHeight, linePaint);
+        canvas.drawRoundRect(mLineRect, mRoundRadius, mRoundRadius - mYOffset, mPaint);
     }
 
     @Override
@@ -160,6 +172,22 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
 
     public void setRoundRadius(float roundRadius) {
         mRoundRadius = roundRadius;
+    }
+
+    public int getTriangleHeight() {
+        return mTriangleHeight;
+    }
+
+    public void setTriangleHeight(int triangleHeight) {
+        mTriangleHeight = triangleHeight;
+    }
+
+    public int getTriangleWidth() {
+        return mTriangleWidth;
+    }
+
+    public void setTriangleWidth(int triangleWidth) {
+        mTriangleWidth = triangleWidth;
     }
 
     public int getMode() {

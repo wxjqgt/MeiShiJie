@@ -5,6 +5,9 @@ import com.weibo.meishijie.mvp.base.BasePresenter;
 import com.weibo.meishijie.mvp.base.BaseView;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
+import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -66,9 +69,9 @@ public class RecommendContract {
      */
     public interface LoadDataListener {
         /**
-         * @param data
+         * @param sancanList
          * @return void
          */
-        void loadData(Data data);
+        void loadData(List<Sancan> sancanList);
     }
 }

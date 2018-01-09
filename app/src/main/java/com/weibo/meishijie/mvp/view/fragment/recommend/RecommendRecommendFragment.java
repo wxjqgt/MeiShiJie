@@ -1,12 +1,13 @@
 package com.weibo.meishijie.mvp.view.fragment.recommend;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
-import com.weibo.meishijie.mvp.model.entities.recommend.Data;
+import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -18,13 +19,11 @@ import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 public class RecommendRecommendFragment extends BaseFragment implements RecommendContract.LoadDataListener, SwipeRefreshLayout.OnRefreshListener {
 
     private RecommendContract.RefreshListener refreshListener;
-    private RecyclerView rv_recommendRecommend;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void findView() {
         swipeRefreshLayout = find(R.id.swipeRefresh_recommendrecommend);
-        rv_recommendRecommend = find(R.id.rv_recommendRecommend);
     }
 
     @Override
@@ -33,8 +32,7 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     }
 
     @Override
-    public void loadData(Data data) {
-
+    public void loadData(List<Sancan> sancanList) {
 
     }
 

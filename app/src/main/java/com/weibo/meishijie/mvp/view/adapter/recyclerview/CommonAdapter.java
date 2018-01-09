@@ -38,6 +38,11 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder>{
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return ViewHolder.createViewHolder(context, LayoutInflater.from(context).inflate(layoutId,parent,false));
     }

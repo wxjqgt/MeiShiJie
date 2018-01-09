@@ -61,8 +61,9 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     public void loadData(Data data) {
-        SpannableString spannableString = new SpannableString("图片 菜谱、食材");
-        spannableString.setSpan(new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon)), 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        SpannableString spannableString = new SpannableString("图片 " + data.getSearch_hint());
+        ImageSpan imageSpan = new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon));
+        spannableString.setSpan(imageSpan, 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_search.setText(spannableString);
         CommonNavigator commonNavigator = new CommonNavigator(context);
         commonNavigator.setAdjustMode(true);
@@ -81,7 +82,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         ViewPagerHelper.bind(nav_indicator, nav_viewpager);
 
         RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
-        loadDataListener.loadData(data);
+        loadDataListener.loadData(data.getSancan());
 
     }
 
