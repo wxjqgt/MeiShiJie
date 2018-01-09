@@ -31,7 +31,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView,
-        RecommendNavItemAdapter.ItemClickListener,RecommendContract.RefreshListener {
+        RecommendNavItemAdapter.ItemClickListener, RecommendContract.RefreshListener {
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject

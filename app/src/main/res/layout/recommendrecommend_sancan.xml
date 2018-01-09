@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@null">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_sancan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="每日三餐.早餐"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_sancan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@mipmap/sancan_more" />
+
+    </LinearLayout>
+
+    <com.weibo.meishijie.mvp.view.widget.ADViewpager
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/colorPrimary"
+        ></com.weibo.meishijie.mvp.view.widget.ADViewpager>
+
+</merge>

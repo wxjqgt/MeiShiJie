@@ -34,6 +34,7 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     @Override
     public void loadData(List<Sancan> sancanList) {
 
+
     }
 
     @Override

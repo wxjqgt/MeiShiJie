@@ -19,7 +19,7 @@
             android:background="@null"
             android:orientation="vertical">
 
-
+            <include layout="@layout/recommendrecommend_sancan"></include>
 
         </LinearLayout>
 
