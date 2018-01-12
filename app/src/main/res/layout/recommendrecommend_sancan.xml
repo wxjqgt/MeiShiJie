@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@null">
+    android:background="@null"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,23 +18,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="每日三餐.早餐"
             android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/iv_sancan"
-            android:layout_width="30dp"
+        <com.weibo.meishijie.mvp.view.widget.Nav_RadioButton
+            android:id="@+id/tv_sancan_more"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:src="@mipmap/sancan_more" />
+            android:gravity="center"
+            android:scaleType="centerCrop"
+            android:text="更多"
+            app:DrawableRight="@mipmap/sancan_more"
+            app:DrawableSize="30dp" />
 
     </LinearLayout>
 
     <com.weibo.meishijie.mvp.view.widget.ADViewpager
+        android:id="@+id/adViewpager_sancan"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@color/colorPrimary"
-        ></com.weibo.meishijie.mvp.view.widget.ADViewpager>
+        android:layout_height="140dp"></com.weibo.meishijie.mvp.view.widget.ADViewpager>
 
 </merge>
