@@ -60,10 +60,12 @@ dependencies {
     //rxcahce
     implementation rootProject.ext.rxcache
     implementation rootProject.ext.rxcache_gson
+    //cardview
+    implementation rootProject.ext.CardView
     //magicindicator
     implementation project(':magicindicator')
     //vLayout
     /*implementation (rootProject.ext.vLayout) {
-        transitive = true
-    }*/
+            transitive = true
+        }*/
 }

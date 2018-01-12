@@ -10,6 +10,7 @@ import com.weibo.meishijie.feature.glide.integration.GlideApp;
  */
 public final class ImageLoader {
     public static void load(Context context, String url, ImageView imageView) {
+        LogUtils.e(url);
         GlideApp.with(context).load(url).into(imageView);
     }
 }

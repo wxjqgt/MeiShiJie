@@ -2,6 +2,7 @@ package com.weibo.meishijie.mvp.view.fragment.recommend;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
         adViewpager_sancan.setAdapter(new ADViewpager.CommonViewPagerAdapter<Sancan>(sancanList) {
             @Override
             public View convert(Sancan sancan, int position) {
+                tv_saccan.setText("每日三餐." + sancan.getTitle());
                 View view = View.inflate(context, R.layout.sancan_item, null);
                 LinearLayout linearLayout = view.findViewById(R.id.hs_sancan_item);
                 for (Sancan.Items item : sancan.getItems()) {
@@ -58,14 +60,14 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
                     ImageView imageView = itemView.findViewById(R.id.iv_sancan_item_item);
                     ImageLoader.load(context, item.getImg(), imageView);
                     TextView textView = itemView.findViewById(R.id.tv_sancan_item_item);
+                    textView.setLayoutParams(new LinearLayout.LayoutParams(500, ViewGroup.LayoutParams.MATCH_PARENT));
                     textView.setText(item.getTitle() + "\n" + item.getRecommend_msg());
                     linearLayout.addView(itemView);
                 }
-                tv_saccan.setText("每日三餐." + sancan.getTitle());
                 return view;
             }
         });
-
+        adViewpager_sancan.startCycle();
     }
 
     @Override
