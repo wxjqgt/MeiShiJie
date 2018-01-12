@@ -1,6 +1,9 @@
 package com.weibo.meishijie.mvp.view.fragment.recommend;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -61,7 +64,10 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
                     ImageLoader.load(context, item.getImg(), imageView);
                     TextView textView = itemView.findViewById(R.id.tv_sancan_item_item);
                     textView.setLayoutParams(new LinearLayout.LayoutParams(500, ViewGroup.LayoutParams.MATCH_PARENT));
-                    textView.setText(item.getTitle() + "\n" + item.getRecommend_msg());
+                    SpannableString spannableString = new SpannableString(item.getTitle() + "\n" + item.getRecommend_msg());
+                    RelativeSizeSpan relativeSizeSpan = new RelativeSizeSpan(1.6f);
+                    spannableString.setSpan(relativeSizeSpan,0,item.getTitle().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    textView.setText(spannableString);
                     linearLayout.addView(itemView);
                 }
                 return view;

@@ -36,6 +36,6 @@
     <com.weibo.meishijie.mvp.view.widget.ADViewpager
         android:id="@+id/adViewpager_sancan"
         android:layout_width="match_parent"
-        android:layout_height="200dp"></com.weibo.meishijie.mvp.view.widget.ADViewpager>
+        android:layout_height="250dp"></com.weibo.meishijie.mvp.view.widget.ADViewpager>
 
 </merge>

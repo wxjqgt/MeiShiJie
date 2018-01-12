@@ -2,22 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_sancan_item_item"
-    android:layout_width="200dp"
-    android:layout_height="match_parent"
+    android:layout_width="210dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="3dp">
 
     <ImageView
         android:id="@+id/iv_sancan_item_item"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        />
 
     <TextView
         android:id="@+id/tv_sancan_item_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="no data"
+        />
 
 </LinearLayout>
