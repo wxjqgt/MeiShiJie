@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.weibo.meishijie.util.AutoUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +23,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        AutoUtils.setSize(this,true,1080,1920);
         findView();
         listener();
         loadData();

@@ -16,6 +16,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
+import com.weibo.meishijie.util.AutoUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
@@ -85,6 +86,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(), container, false);
+        AutoUtils.auto(view);
         findView();
         listener();
         return view;
