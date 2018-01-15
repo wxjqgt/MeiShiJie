@@ -31,6 +31,6 @@ public class RecommendModelImlp implements RecommendContract.RecommendModel {
         Observable<Recommend> result = meiShiJieCacheApiService.requestHomeRecommendData(
                 meiShiJieApiService.requestHomeRecommendData(),
                 new EvictProvider(true));
-        loadListener.loadHomeRecommendData(result);
+        loadListener.loadRecommendData(result);
     }
 }

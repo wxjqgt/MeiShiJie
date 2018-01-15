@@ -42,6 +42,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
 
     protected void loadData() {
     }
+
     protected <T extends View> T find(int id) {
         return (T) view.findViewById(id);
     }

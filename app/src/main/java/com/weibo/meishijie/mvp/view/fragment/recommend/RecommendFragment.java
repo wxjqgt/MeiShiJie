@@ -13,13 +13,13 @@ import android.widget.TextView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
-import com.weibo.meishijie.mvp.view.adapter.FragmentAdapter;
-import com.weibo.meishijie.mvp.view.adapter.RecommendNavItemAdapter;
-import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
 import com.weibo.meishijie.di.module.RecommendModule;
+import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
+import com.weibo.meishijie.mvp.view.adapter.FragmentAdapter;
+import com.weibo.meishijie.mvp.view.adapter.RecommendNavItemAdapter;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -30,6 +30,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * create on 2018/01/15
+ *
+ * @author 韦大帅
+ */
 public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView,
         RecommendNavItemAdapter.ItemClickListener, RecommendContract.RefreshListener {
 
@@ -38,13 +43,16 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     protected RecommendContract.RecommendPresenter presenter;
     private MagicIndicator nav_indicator;
     private ViewPager nav_viewpager;
+    /**
+     * sancan
+     */
     private TextView tv_search;
+    private CommonNavigator commonNavigator;
+    private RecommendRecommendFragment recommendRecommendFragment;
+    private List<Fragment> fragmentList;
 
     public RecommendFragment() {
-        DaggerRecommendComponent.builder()
-                .recommendModule(new RecommendModule(this))
-                .build()
-                .inject(this);
+        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this);
     }
 
     @Override
@@ -56,34 +64,35 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     protected void loadData() {
-        presenter.onStart();
-    }
-
-    @Override
-    public void loadData(Data data) {
-        SpannableString spannableString = new SpannableString("图片 " + data.getSearch_hint());
-        ImageSpan imageSpan = new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon));
-        spannableString.setSpan(imageSpan, 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        tv_search.setText(spannableString);
-        CommonNavigator commonNavigator = new CommonNavigator(context);
+        commonNavigator = new CommonNavigator(context);
         commonNavigator.setAdjustMode(true);
-        commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
-        nav_indicator.setNavigator(commonNavigator);
-
-        List<Fragment> fragmentList = new ArrayList<>();
-        RecommendRecommendFragment recommendRecommendFragment = RecommendRecommendFragment.newInstance();
+        fragmentList = new ArrayList<>();
+        recommendRecommendFragment = RecommendRecommendFragment.newInstance();
         recommendRecommendFragment.setRefreshListener(this);
         fragmentList.add(recommendRecommendFragment);
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
-        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
+        presenter.onStart();
+    }
 
-        ViewPagerHelper.bind(nav_indicator, nav_viewpager);
-
+    @Override
+    public void loadRecommendData(Data data) {
+        SpannableString spannableString = new SpannableString("图片 " + data.getSearch_hint());
+        ImageSpan imageSpan = new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon));
+        spannableString.setSpan(imageSpan, 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv_search.setText(spannableString);
+        commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
         RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
         loadDataListener.loadData(data.getSancan());
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        nav_indicator.setNavigator(commonNavigator);
+        nav_viewpager.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragmentList));
+        ViewPagerHelper.bind(nav_indicator, nav_viewpager);
     }
 
     @Override

@@ -33,7 +33,7 @@ public class RecommendContract {
          *
          * @param data
          */
-        void loadData(Data data);
+        void loadRecommendData(Data data);
     }
 
     public interface RecommendModel extends BaseModel {
@@ -50,7 +50,7 @@ public class RecommendContract {
         /**
          * @param homeRecommend
          */
-        void loadHomeRecommendData(Observable<Recommend> homeRecommend);
+        void loadRecommendData(Observable<Recommend> homeRecommend);
     }
 
     /**

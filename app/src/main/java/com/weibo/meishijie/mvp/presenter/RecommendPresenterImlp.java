@@ -26,11 +26,11 @@ public class RecommendPresenterImlp implements RecommendContract.RecommendPresen
     }
 
     @Override
-    public void loadHomeRecommendData(Observable<Recommend> result) {
+    public void loadRecommendData(Observable<Recommend> result) {
         result.compose(RxUtil.io_mainO())
                 .compose(recommendView.bindLifecycle())
                 .subscribe(recommend -> {
-                        recommendView.loadData(recommend.getData());
+                        recommendView.loadRecommendData(recommend.getData());
                 });
     }
 
