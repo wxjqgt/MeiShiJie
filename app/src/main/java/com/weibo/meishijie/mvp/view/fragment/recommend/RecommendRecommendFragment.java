@@ -40,7 +40,7 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     @Override
     protected void findView() {
         swipeRefreshLayout = find(R.id.swipeRefresh_recommendrecommend);
-        //sancan
+
         tv_saccan = find(R.id.tv_sancan);
         adViewpager_sancan = find(R.id.adViewpager_sancan);
     }
@@ -51,7 +51,8 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
     }
 
     @Override
-    public void loadData(List<Sancan> sancanList) {
+    public void loadSancanData(List<Sancan> sancanList) {
+        swipeRefreshLayout.setRefreshing(false);
         adViewpager_sancan.setAdapter(new ADViewpager.CommonViewPagerAdapter<Sancan>(sancanList) {
             @Override
             public View convert(Sancan sancan, int position) {
@@ -66,14 +67,13 @@ public class RecommendRecommendFragment extends BaseFragment implements Recommen
                     textView.setLayoutParams(new LinearLayout.LayoutParams(500, ViewGroup.LayoutParams.MATCH_PARENT));
                     SpannableString spannableString = new SpannableString(item.getTitle() + "\n" + item.getRecommend_msg());
                     RelativeSizeSpan relativeSizeSpan = new RelativeSizeSpan(1.6f);
-                    spannableString.setSpan(relativeSizeSpan,0,item.getTitle().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    spannableString.setSpan(relativeSizeSpan, 0, item.getTitle().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                     textView.setText(spannableString);
                     linearLayout.addView(itemView);
                 }
                 return view;
             }
         });
-        adViewpager_sancan.startCycle();
     }
 
     @Override

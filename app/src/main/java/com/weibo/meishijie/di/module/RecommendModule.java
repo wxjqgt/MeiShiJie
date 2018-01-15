@@ -14,22 +14,15 @@ import dagger.Provides;
 
 @Module
 public class RecommendModule {
-
-    private RecommendContract.RecommendView recommendView;
-
-    public RecommendModule(RecommendContract.RecommendView recommendView) {
-        this.recommendView = recommendView;
+    @FragmentScope
+    @Provides
+    RecommendContract.RecommendModel providesRecommendModel() {
+        return new RecommendModelImlp();
     }
 
     @FragmentScope
     @Provides
     RecommendContract.RecommendPresenter providesRecommendPresenter(RecommendContract.RecommendModel recommendModel) {
-        return new RecommendPresenterImlp(recommendModel, recommendView);
-    }
-
-    @FragmentScope
-    @Provides
-    RecommendContract.RecommendModel providesRecommendModel() {
-        return new RecommendModelImlp();
+        return new RecommendPresenterImlp(recommendModel);
     }
 }

@@ -27,10 +27,7 @@ public class RecommendModelImlp implements RecommendContract.RecommendModel {
     }
 
     @Override
-    public void load(RecommendContract.LoadListener loadListener, boolean refresh) {
-        Observable<Recommend> result = meiShiJieCacheApiService.requestHomeRecommendData(
-                meiShiJieApiService.requestHomeRecommendData(),
-                new EvictProvider(true));
-        loadListener.loadRecommendData(result);
+    public Observable<Recommend> loadRecommendData(boolean refresh) {
+        return meiShiJieCacheApiService.requestHomeRecommendData(meiShiJieApiService.requestHomeRecommendData(), new EvictProvider(refresh));
     }
 }

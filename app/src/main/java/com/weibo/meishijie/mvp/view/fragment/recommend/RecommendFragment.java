@@ -14,10 +14,10 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
-import com.weibo.meishijie.di.module.RecommendModule;
 import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
+import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 import com.weibo.meishijie.mvp.view.adapter.FragmentAdapter;
 import com.weibo.meishijie.mvp.view.adapter.RecommendNavItemAdapter;
 
@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * create on 2018/01/15
@@ -52,7 +56,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     private List<Fragment> fragmentList;
 
     public RecommendFragment() {
-        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this)).build().inject(this);
+        DaggerRecommendComponent.create().inject(this);
     }
 
     @Override
@@ -74,9 +78,9 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
         presenter.onStart();
+        refresh();
     }
 
-    @Override
     public void loadRecommendData(Data data) {
         SpannableString spannableString = new SpannableString("图片 " + data.getSearch_hint());
         ImageSpan imageSpan = new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon));
@@ -84,7 +88,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         tv_search.setText(spannableString);
         commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
         RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
-        loadDataListener.loadData(data.getSancan());
+        loadDataListener.loadSancanData(data.getSancan());
     }
 
     @Override
@@ -102,7 +106,15 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     public void refresh() {
-        presenter.refresh();
+        presenter.loadRecommendData(true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Recommend>() {
+                    @Override
+                    public void accept(Recommend recommend) throws Exception {
+                        loadRecommendData(recommend.getData());
+                    }
+                });
     }
 
     @Override

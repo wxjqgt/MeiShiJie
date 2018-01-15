@@ -3,7 +3,6 @@ package com.weibo.meishijie.mvp.contract;
 import com.weibo.meishijie.mvp.base.BaseModel;
 import com.weibo.meishijie.mvp.base.BasePresenter;
 import com.weibo.meishijie.mvp.base.BaseView;
-import com.weibo.meishijie.mvp.model.entities.recommend.Data;
 import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 import com.weibo.meishijie.mvp.model.entities.recommend.Sancan;
 
@@ -24,26 +23,20 @@ public class RecommendContract {
         /**
          * 刷新数据的方法
          */
-        void refresh();
+        Observable<Recommend> loadRecommendData(boolean refresh);
     }
 
     public interface RecommendView extends BaseView {
-        /**
-         * 用于显示数据
-         *
-         * @param data
-         */
-        void loadRecommendData(Data data);
+
     }
 
     public interface RecommendModel extends BaseModel {
         /**
          * 用于获取资源调用
          *
-         * @param loadListener 传入的回掉接口
          * @param refresh
          */
-        void load(LoadListener loadListener, boolean refresh);
+        Observable<Recommend> loadRecommendData(boolean refresh);
     }
 
     public interface LoadListener {
@@ -72,6 +65,6 @@ public class RecommendContract {
          * @param sancanList
          * @return void
          */
-        void loadData(List<Sancan> sancanList);
+        void loadSancanData(List<Sancan> sancanList);
     }
 }
