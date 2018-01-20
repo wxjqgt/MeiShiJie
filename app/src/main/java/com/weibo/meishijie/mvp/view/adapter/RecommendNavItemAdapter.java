@@ -21,11 +21,10 @@ import java.util.List;
 public class RecommendNavItemAdapter extends CommonNavigatorAdapter {
 
     private List<NavItems> navItemsList;
-    private ItemClickListener itemClickListener;
+    private OnItemClickListener onItemClickListener;
 
-    public RecommendNavItemAdapter(List<NavItems> navItemsList,ItemClickListener itemClickListener){
+    public RecommendNavItemAdapter(List<NavItems> navItemsList){
         this.navItemsList = navItemsList;
-        this.itemClickListener = itemClickListener;
     }
     @Override
     public int getCount() {
@@ -40,8 +39,8 @@ public class RecommendNavItemAdapter extends CommonNavigatorAdapter {
         colorTransitionPagerTitleView.setText(navItemsList.get(index).getTitle());
         colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view,context,index);
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(v,context,index);
             }
         });
         return colorTransitionPagerTitleView;
@@ -55,8 +54,12 @@ public class RecommendNavItemAdapter extends CommonNavigatorAdapter {
         return indicator;
     }
 
-    public interface ItemClickListener{
-        void onItemClick(View view,Context context,int index);
+    public void setItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view, Context context, int index);
     }
 
 }

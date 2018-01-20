@@ -36,7 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author 韦大帅
  */
 public class RecommendFragment extends BaseFragment implements RecommendContract.RecommendView,
-        RecommendNavItemAdapter.ItemClickListener, RecommendContract.RefreshListener {
+        RecommendNavItemAdapter.OnItemClickListener, RecommendContract.RefreshListener {
 
     public static final String TAG = RecommendFragment.class.getSimpleName();
     @Inject
@@ -48,6 +48,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
      */
     private TextView tv_search;
     private CommonNavigator commonNavigator;
+    private RecommendNavItemAdapter recommendNavItemAdapter;
     private RecommendRecommendFragment recommendRecommendFragment;
     private List<Fragment> fragmentList;
 
@@ -73,6 +74,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
+
     }
 
     @Override
@@ -91,7 +93,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         ImageSpan imageSpan = new ImageSpan(context, BitmapFactory.decodeResource(getResources(), R.mipmap.serch_hint_icon));
         spannableString.setSpan(imageSpan, 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_search.setText(spannableString);
-        commonNavigator.setAdapter(new RecommendNavItemAdapter(data.getNav_items(), this));
+
+        recommendNavItemAdapter = new RecommendNavItemAdapter(data.getNav_items());
+        commonNavigator.setAdapter(recommendNavItemAdapter);
+
         RecommendContract.LoadDataListener loadDataListener = recommendRecommendFragment;
         loadDataListener.loadSancanData(data.getSancan());
     }
@@ -130,6 +135,8 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     @Override
     public void onDestroy() {
         super.onDestroy();
+        recommendNavItemAdapter.setItemClickListener(null);
+        recommendRecommendFragment.setRefreshListener(null);
         presenter.onDestroy();
         presenter = null;
     }
