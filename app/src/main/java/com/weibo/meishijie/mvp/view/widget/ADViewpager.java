@@ -1,9 +1,6 @@
 package com.weibo.meishijie.mvp.view.widget;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -20,23 +17,15 @@ import com.weibo.meishijie.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.functions.Consumer;
 
 /**
  * Created by Administrator on 2016/6/8.
  */
-public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeListener {
+public class ADViewpager extends FrameLayout {
 
     private static final int OK = 0x1;
-
-    private ScheduledExecutorService se;
-
-    private Handler handler;
 
     private Context context;
     private boolean recycle = false;
@@ -55,8 +44,9 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
     public InitialValueObservable<Integer> pageSelections() {
         return RxViewPager.pageSelections(viewPager);
     }
+
     public io.reactivex.Observable<Integer> pageScrollStateChanges() {
-        RxViewPager.pageScrollStateChanges(viewPager);
+        return RxViewPager.pageScrollStateChanges(viewPager);
     }
 
     public void setIconGravity(int gravity) {
@@ -84,20 +74,6 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         viewPager = findViewById(R.id.viewpager);
         linearLayout = findViewById(R.id.linear_icon);
 
-        initThreadPool();
-        initHandler();
-        se.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                if (recycle) {
-                    Message msg = Message.obtain();
-                    msg.what = OK;
-                    msg.arg1 = viewPager.getCurrentItem() + 1;
-                    handler.sendMessage(msg);
-                    //msg.recycle();
-                }
-            }
-        }, 1, seconds, TimeUnit.SECONDS);
     }
 
     private void build() {
@@ -119,13 +95,6 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         viewPager.setCurrentItem(1);
     }
 
-    public void recycle() {
-        if (se != null && !se.isShutdown()) {
-            se.shutdown();
-            se = null;
-        }
-    }
-
     public void stopCycle() {
         recycle = false;
     }
@@ -134,7 +103,7 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         int p = position;
         if (position == count - 1) {
             p = 1;
-            handler.postDelayed(new Runnable() {
+            viewPager.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     viewPager.setCurrentItem(1, false);
@@ -142,7 +111,7 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
             }, 1000);
         } else if (position == 0) {
             p = count - 2;
-            handler.postDelayed(new Runnable() {
+            viewPager.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     viewPager.setCurrentItem(count - 2, false);
@@ -155,29 +124,14 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         ImageView imageView = (ImageView) linearLayout.getChildAt(p - 1);
         imageView.setImageResource(frontRes);
         lastImageView = imageView;
-
-    }
-
-    private void initThreadPool() {
-        if (se != null && !se.isShutdown()) {
-            return;
-        }
-        se = Executors.newSingleThreadScheduledExecutor();
-    }
-
-    private void initHandler() {
-        if (handler != null) {
-            return;
-        }
-        handler = new Handler(Looper.getMainLooper()) {
+        viewPager.postDelayed(new Runnable() {
             @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == OK) {
-                    viewPager.setCurrentItem(msg.arg1);
+            public void run() {
+                if (recycle) {
+                    viewPager.setCurrentItem(position + 1);
                 }
             }
-        };
+        }, seconds * 1000);
     }
 
     public ADViewpager(Context context) {
