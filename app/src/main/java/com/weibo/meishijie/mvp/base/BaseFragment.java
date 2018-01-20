@@ -38,6 +38,9 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
     protected void findView() {
     }
 
+    protected void initView() {
+    }
+
     protected void listener() {
     }
 
@@ -88,6 +91,7 @@ public abstract class BaseFragment extends Fragment implements LifecycleProvider
         view = inflater.inflate(getLayoutId(), container, false);
         AutoUtils.auto(view);
         findView();
+        initView();
         listener();
         return view;
     }

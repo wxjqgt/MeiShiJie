@@ -10,14 +10,11 @@ import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
 import com.weibo.meishijie.di.component.DaggerRecommendComponent;
 import com.weibo.meishijie.mvp.base.BaseFragment;
 import com.weibo.meishijie.mvp.contract.RecommendContract;
 import com.weibo.meishijie.mvp.model.entities.recommend.Data;
-import com.weibo.meishijie.mvp.model.entities.recommend.Recommend;
 import com.weibo.meishijie.mvp.view.adapter.FragmentAdapter;
 import com.weibo.meishijie.mvp.view.adapter.RecommendNavItemAdapter;
 
@@ -31,7 +28,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -67,16 +63,25 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     }
 
     @Override
-    protected void loadData() {
+    protected void initView() {
         commonNavigator = new CommonNavigator(context);
         commonNavigator.setAdjustMode(true);
+
         fragmentList = new ArrayList<>();
         recommendRecommendFragment = RecommendRecommendFragment.newInstance();
-        recommendRecommendFragment.setRefreshListener(this);
         fragmentList.add(recommendRecommendFragment);
         fragmentList.add(SmartMakeDishesFragment.newInstance());
         fragmentList.add(RecipeClassificationFragment.newInstance());
         fragmentList.add(PeopleRaidersFragment.newInstance());
+    }
+
+    @Override
+    protected void listener() {
+        recommendRecommendFragment.setRefreshListener(this);
+    }
+
+    @Override
+    protected void loadData() {
         presenter.onStart();
         refresh();
     }
@@ -109,17 +114,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         presenter.loadRecommendData(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Recommend>() {
-                    @Override
-                    public void accept(Recommend recommend) throws Exception {
-                        loadRecommendData(recommend.getData());
-                    }
-                });
-    }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindLifecycle() {
-        return RxLifecycleAndroid.bindFragment(lifecycleSubject);
+                .subscribe(recommend -> loadRecommendData(recommend.getData()));
     }
 
     public static RecommendFragment newInstance() {
