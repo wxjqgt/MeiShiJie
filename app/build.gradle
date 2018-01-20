@@ -46,7 +46,8 @@ dependencies {
     //rxpermissions2
     implementation rootProject.ext.rxpermissions
     //rxbinding2
-    implementation rootProject.ext.rxbinding2_appcompat
+    implementation rootProject.ext.rxbinding2_v4
+    implementation rootProject.ext.rxbinding2_v7
     implementation rootProject.ext.rxbinding2_recyclerview
     implementation rootProject.ext.rxbinding2_design
     //rxlifecycle2

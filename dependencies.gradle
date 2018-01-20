@@ -69,7 +69,8 @@ ext{
     rxlifecycle                 = "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle2_version"
 
     rxbinding2_recyclerview     = "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxbinding2_version"
-    rxbinding2_appcompat        = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding2_version"
+    rxbinding2_v4               = "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxbinding2_version"
+    rxbinding2_v7               = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding2_version"
     rxbinding2_design           = "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding2_version"
 
     rxcache                     = "com.github.VictorAlbertos.RxCache:runtime:$rxcache_version"

@@ -13,25 +13,30 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jakewharton.rxbinding2.InitialValueObservable;
+import com.jakewharton.rxbinding2.support.v4.view.RxViewPager;
+import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 import com.weibo.meishijie.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * Created by Administrator on 2016/6/8.
  */
-public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeListener{
+public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     private static final int OK = 0x1;
 
     private ScheduledExecutorService se;
 
     private Handler handler;
-    private OnPagerChangeListener onPagerChangeListener;
 
     private Context context;
     private boolean recycle = false;
@@ -45,6 +50,13 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         viewPager.setAdapter(pagerAdapter);
         count = pagerAdapter.getCount();
         build();
+    }
+
+    public InitialValueObservable<Integer> pageSelections() {
+        return RxViewPager.pageSelections(viewPager);
+    }
+    public io.reactivex.Observable<Integer> pageScrollStateChanges() {
+        RxViewPager.pageScrollStateChanges(viewPager);
     }
 
     public void setIconGravity(int gravity) {
@@ -69,8 +81,8 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
     private void init(Context context) {
         this.context = context;
         inflate(context, R.layout.viewpager, this);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        linearLayout = (LinearLayout) findViewById(R.id.linear_icon);
+        viewPager = findViewById(R.id.viewpager);
+        linearLayout = findViewById(R.id.linear_icon);
 
         initThreadPool();
         initHandler();
@@ -89,7 +101,14 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
     }
 
     private void build() {
-        viewPager.addOnPageChangeListener(this);
+        RxViewPager.pageSelections(viewPager)
+                .compose(RxLifecycleAndroid.bindView(this))
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        OnPageSelected(integer.intValue());
+                    }
+                });
         int icons = count - 2;
         for (int i = 0; i < icons; i++) {
             ImageView imageView = new ImageView(context);
@@ -111,15 +130,7 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         recycle = false;
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (onPagerChangeListener != null) {
-            onPagerChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
-        }
-    }
-
-    @Override
-    public void onPageSelected(int position) {
+    public void OnPageSelected(int position) {
         int p = position;
         if (position == count - 1) {
             p = 1;
@@ -145,16 +156,6 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
         imageView.setImageResource(frontRes);
         lastImageView = imageView;
 
-        if (onPagerChangeListener != null) {
-            onPagerChangeListener.onPageSelected(position);
-        }
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        if (onPagerChangeListener != null) {
-            onPagerChangeListener.onPageScrollStateChanged(state);
-        }
     }
 
     private void initThreadPool() {
@@ -177,18 +178,6 @@ public class ADViewpager extends FrameLayout implements ViewPager.OnPageChangeLi
                 }
             }
         };
-    }
-
-    public void setOnPagerChangeListener(OnPagerChangeListener onPagerChangeListener) {
-        this.onPagerChangeListener = onPagerChangeListener;
-    }
-
-    public interface OnPagerChangeListener {
-        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
-
-        void onPageSelected(int position);
-
-        void onPageScrollStateChanged(int state);
     }
 
     public ADViewpager(Context context) {
